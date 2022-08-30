@@ -6,6 +6,8 @@ onready var playerr_pos = Vector2.ZERO
 export var score: = 100
 export var bullet_speed = 2000
 export var fire_rate = 0.4
+export var health: = 10
+export var damage = [1,2]
 
 var bullet_object = preload("res://src/Objects/BulletEnemy.tscn")
 var floating_text = preload("res://src/UI/FloatingText.tscn")
@@ -18,7 +20,12 @@ func _ready() -> void:
 func _on_Stomp_body_entered(body: Node) -> void:
 	score_popup()
 	PlayerData.score += score
-	destroy()
+	health -= damage[randi() % 2]
+	print(health)
+	if health <= 0:
+		destroy()
+	else:
+		return
 	
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta
@@ -48,7 +55,7 @@ func _process(delta: float) -> void:
 		
 func score_popup():
 	var text = floating_text.instance()
-	text.amount = score
+	text.amount = damage
 	add_child(text)
 	
 func destroy():

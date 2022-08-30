@@ -52,5 +52,3 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/ShootBullet = SubResource( 2 )
-
-[connection signal="body_entered" from="." to="." method="_on_RigidBody2D_body_entered"]

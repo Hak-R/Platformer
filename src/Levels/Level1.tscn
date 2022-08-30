@@ -115,10 +115,17 @@ position = Vector2( 1499, -560 )
 [node name="Enemies" type="Node" parent="."]
 
 [node name="BlobEnemy" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 2771, 718 )
+position = Vector2( 2901, 715 )
 
 [node name="NoteEnemy" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( 1414, -146 )
+speed = Vector2( 800, 1300 )
+gravity = 4000.0
+score = 100
+bullet_speed = 2000
+fire_rate = 0.4
+health = 10
+damage = [ 1, 2 ]
 
 [node name="Spikes" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 3968, 1043 )
@@ -153,7 +160,7 @@ message_text = "Welcome to my game!"
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 224, 866 )
 
-[node name="Camera2D" parent="Player" index="4"]
+[node name="Camera2D" parent="Player" index="3"]
 limit_left = 0
 limit_top = -5675
 limit_right = 20562

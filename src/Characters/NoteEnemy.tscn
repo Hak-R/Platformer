@@ -7,15 +7,21 @@
 collision_layer = 2
 collision_mask = 9
 script = ExtResource( 1 )
+speed = null
+gravity = null
+score = null
+bullet_speed = null
+fire_rate = null
+health = null
+damage = null
 
 [node name="enemy" type="Sprite" parent="."]
 position = Vector2( 2, -2 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -19, 59 )
-scale = Vector2( 0.635, 0.466414 )
-polygon = PoolVector2Array( 55.1181, -132.929, 55.1181, -32.1602, 56.6929, 70.7525, -55.1181, 70.8336, -53.5433, -107.201, 14.1732, -105.057, 14.1732, -130.785 )
+position = Vector2( 2, -2 )
+polygon = PoolVector2Array( 59, -91.9, 59, -88, 58, -88, 58, -25, 18, -25, 18, -21, 17, -21, 17, 93.2, 18.4, 94.5, 17.3, 97, 15, 97, -58, 98, -58, 9, -17, 9, -17, -94.1 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 position = Vector2( 18, -11 )
@@ -28,11 +34,11 @@ physics_process_parent = true
 modulate = Color( 0.65098, 0.0509804, 0.92549, 1 )
 position = Vector2( 0, -61 )
 collision_layer = 2
+priority = 1.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stomp"]
-position = Vector2( 1, 30 )
-scale = Vector2( 0.635, 0.293586 )
-polygon = PoolVector2Array( 89.7638, 3.40611, 26.7717, 6.81228, 25.1969, 88.5602, 17.2, 94.8, 16.7, 96, -20.4724, 95.3725, -20.4724, 6.81228, -22.0472, -207.776, 88.189, -211.182 )
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Stomp"]
+position = Vector2( 2, 59 )
+polygon = PoolVector2Array( 59, -91.9, 59, -88, 58, -88, 58, -25, 18, -25, 18, -21, 17, -21, 17, 93.2, 18.4, 94.5, 17.3, 97, 15, 97, -58, 98, -58, 9, -17, 9, -17, -94.1 )
 
 [node name="ShootTimer" type="Timer" parent="."]
 one_shot = true
