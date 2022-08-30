@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://start-assets/Fonts/font_message.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/Label.gd" type="Script" id=2]
+[ext_resource path="res://start-assets/Design/message.png" type="Texture" id=3]
+
+[node name="MessageLabel" type="Label"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -576.0
+margin_top = 80.0
+margin_right = 576.0
+margin_bottom = 219.0
+custom_fonts/font = ExtResource( 1 )
+text = "TEXT HERE"
+align = 1
+valign = 1
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Message" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 576, 72 )
+scale = Vector2( 0.6, 1 )
+texture = ExtResource( 3 )
