@@ -36,7 +36,7 @@ tracks/1/keys = {
 
 [node name="RigidBody2D" type="RigidBody2D"]
 modulate = Color( 1, 1, 1, 0 )
-collision_layer = 64
+collision_layer = 128
 script = ExtResource( 2 )
 
 [node name="Circle" type="Sprite" parent="."]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://start-assets/Fonts/font_popup.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/UI/FloatingText2.gd" type="Script" id=2]
+
+[node name="FloatingText2" type="Position2D"]
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 94.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 59, 11 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "TEST"
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="FloatTimer" type="Timer" parent="."]
+one_shot = true

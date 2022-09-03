@@ -103,7 +103,8 @@ shoot={
 2d_physics/layer_4="world"
 2d_physics/layer_5="bounce"
 2d_physics/layer_6="sign"
-2d_physics/layer_7="bullet"
+2d_physics/layer_7="bullet_friendly"
+2d_physics/layer_8="bullet_enemy"
 
 [physics]
 

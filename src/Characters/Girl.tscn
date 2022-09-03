@@ -1,0 +1,194 @@
+[gd_scene load_steps=35 format=2]
+
+[ext_resource path="res://src/Characters/Girl.gd" type="Script" id=1]
+[ext_resource path="res://start-assets/Nera/sprites/legs/idle/leg_idle.png" type="Texture" id=2]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle3.png" type="Texture" id=3]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle0.png" type="Texture" id=4]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle1.png" type="Texture" id=5]
+[ext_resource path="res://src/Characters/Gun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run/Modified/torso_run3.png" type="Texture" id=7]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run/Modified/torso_run2.png" type="Texture" id=9]
+[ext_resource path="res://start-assets/Nera/sprites/legs/jump/leg_jump3.png" type="Texture" id=10]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run/Modified/torso_run5.png" type="Texture" id=11]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run/Modified/torso_run1.png" type="Texture" id=12]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run/Modified/torso_run4.png" type="Texture" id=13]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run/Modified/torso_run6.png" type="Texture" id=14]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run/Modified/torso_run7.png" type="Texture" id=15]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle2.png" type="Texture" id=16]
+[ext_resource path="res://start-assets/Nera/sprites/legs/jump/leg_jump4.png" type="Texture" id=17]
+[ext_resource path="res://start-assets/Nera/sprites/legs/jump/leg_jump2.png" type="Texture" id=18]
+[ext_resource path="res://start-assets/Nera/sprites/legs/jump/leg_jump1.png" type="Texture" id=19]
+[ext_resource path="res://start-assets/Nera/sprites/torso/shoot/shoot1.png" type="Texture" id=20]
+[ext_resource path="res://start-assets/Nera/sprites/torso/shoot/shoot3.png" type="Texture" id=21]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run/leg_run7.png" type="Texture" id=22]
+[ext_resource path="res://start-assets/Nera/sprites/torso/shoot/shoot2.png" type="Texture" id=23]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run/leg_run1.png" type="Texture" id=24]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run/leg_run2.png" type="Texture" id=25]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run/leg_run6.png" type="Texture" id=26]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run/leg_run3.png" type="Texture" id=27]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run/leg_run0.png" type="Texture" id=28]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run/leg_run4.png" type="Texture" id=29]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run/leg_run5.png" type="Texture" id=30]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run/Modified/torso_run0.png" type="Texture" id=31]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+loop = true
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.333333, 0.666667, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 16 ), ExtResource( 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Legs:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.333333, 0.666667, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Jump"
+length = 0.5
+loop = true
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Legs:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.182295, 0.339208, 0.497062 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 10 ), ExtResource( 17 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Run"
+loop = true
+step = 0.142857
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.142857, 0.285714, 0.428571, 0.571429, 0.714286, 0.857143, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 31 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 15 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Legs:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.143, 0.286, 0.429, 0.572, 0.715, 0.858, 1.001 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 28 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 26 ), ExtResource( 22 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Shoot"
+length = 0.3
+step = 0.333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.104552, 0.204252, 0.299147 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 21 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ) ]
+}
+
+[node name="Girl" type="KinematicBody2D"]
+collision_mask = 138
+script = ExtResource( 1 )
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Player" type="Sprite" parent="."]
+scale = Vector2( 3.83, 3.83 )
+texture = ExtResource( 4 )
+
+[node name="CollisionPlayer" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 3.83, 3.83 )
+polygon = PoolVector2Array( 5, -17.6, 7.8329, -15.9269, 10.705, -16.4491, 13.0548, -14.6214, 13.3159, -10.4439, 13.3159, -7.5718, 12.5326, -3.65535, 11.7493, -2.34987, 10.9661, -0.261097, 10.9661, 4.69974, 3.13316, 4.69974, -7.8329, 3.39426, -8.094, -1.04439, -8.87728, -10.1828, -7.3107, -13.8381, -5, -17.6, -3.13316, -18.0157, 2.87206, -18.0157 )
+
+[node name="Legs" type="Sprite" parent="."]
+scale = Vector2( 3.83, 3.83 )
+texture = ExtResource( 2 )
+
+[node name="CollisionLegs" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 3.83, 3.83 )
+polygon = PoolVector2Array( 2.87206, 4.43864, 3.65535, 8.61619, 10.9661, 24.5431, 6.26632, 24.8042, -0.522193, 11.4883, -6.52742, 19.0601, -7.04961, 21.4099, -5.22193, 24.5431, -12.2715, 25.0653, -12.0104, 20.6266, -8.61619, 13.8381, -6.00522, 3.39426 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+process_mode = 0
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+drag_margin_right = 0.0
+
+[node name="EnemyDetect" type="Area2D" parent="."]
+visible = false
+collision_mask = 130
+monitorable = false
+
+[node name="CollisionLegs2" type="CollisionPolygon2D" parent="EnemyDetect"]
+scale = Vector2( 3.83, 3.83 )
+polygon = PoolVector2Array( 15.1436, -16.7102, 12.0104, 8.61619, 10.9661, 24.5431, 6.26632, 24.8042, -0.522193, 11.4883, -6.52742, 19.0601, -7.04961, 21.4099, -3.91645, 25.0653, -14.3603, 24.8042, -14.0992, 21.1488, -13.0548, 13.0548, -11.7493, -19.3211 )
+
+[node name="Gun" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="gun_player" parent="Gun" index="0"]
+visible = false
+
+[node name="cannon_collision" parent="Gun" index="1"]
+visible = false
+
+[node name="cannon" parent="Gun" index="2"]
+position = Vector2( 21, 0 )
+scale = Vector2( 0.0758335, 0.0758335 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+reset_on_save = false
+anims/Idle = SubResource( 1 )
+anims/Jump = SubResource( 6 )
+anims/Run = SubResource( 2 )
+anims/Shoot = SubResource( 5 )
+
+[connection signal="area_entered" from="EnemyDetect" to="." method="_on_EnemyDetect_area_entered"]
+[connection signal="body_entered" from="EnemyDetect" to="." method="_on_EnemyDetect_body_entered"]
+
+[editable path="Gun"]
