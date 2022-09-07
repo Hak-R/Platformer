@@ -132,24 +132,19 @@ script = ExtResource( 1 )
 one_shot = true
 
 [node name="Player" type="Sprite" parent="."]
-scale = Vector2( 3.83, 3.83 )
 texture = ExtResource( 4 )
 
 [node name="CollisionPlayer" type="CollisionPolygon2D" parent="."]
-scale = Vector2( 3.83, 3.83 )
 polygon = PoolVector2Array( 5, -17.6, 7.8329, -15.9269, 10.705, -16.4491, 13.0548, -14.6214, 13.3159, -10.4439, 13.3159, -7.5718, 12.5326, -3.65535, 11.7493, -2.34987, 10.9661, -0.261097, 10.9661, 4.69974, 3.13316, 4.69974, -7.8329, 3.39426, -8.094, -1.04439, -8.87728, -10.1828, -7.3107, -13.8381, -5, -17.6, -3.13316, -18.0157, 2.87206, -18.0157 )
 
 [node name="Legs" type="Sprite" parent="."]
-scale = Vector2( 3.83, 3.83 )
 texture = ExtResource( 2 )
 
 [node name="CollisionLegs" type="CollisionPolygon2D" parent="."]
-scale = Vector2( 3.83, 3.83 )
 polygon = PoolVector2Array( 2.87206, 4.43864, 3.65535, 8.61619, 10.9661, 24.5431, 6.26632, 24.8042, -0.522193, 11.4883, -6.52742, 19.0601, -7.04961, 21.4099, -5.22193, 24.5431, -12.2715, 25.0653, -12.0104, 20.6266, -8.61619, 13.8381, -6.00522, 3.39426 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 1.5, 1.5 )
 process_mode = 0
 limit_smoothed = true
 drag_margin_h_enabled = true
@@ -159,13 +154,11 @@ smoothing_speed = 10.0
 drag_margin_right = 0.0
 
 [node name="EnemyDetect" type="Area2D" parent="."]
-visible = false
 collision_mask = 130
 monitorable = false
 
 [node name="CollisionLegs2" type="CollisionPolygon2D" parent="EnemyDetect"]
-scale = Vector2( 3.83, 3.83 )
-polygon = PoolVector2Array( 15.1436, -16.7102, 12.0104, 8.61619, 10.9661, 24.5431, 6.26632, 24.8042, -0.522193, 11.4883, -6.52742, 19.0601, -7.04961, 21.4099, -3.91645, 25.0653, -14.3603, 24.8042, -14.0992, 21.1488, -13.0548, 13.0548, -11.7493, -19.3211 )
+polygon = PoolVector2Array( 14, -16, 12.0104, 8.61619, 10.9661, 24.5431, 6.26632, 24.8042, -0.522193, 11.4883, -6.52742, 19.0601, -7.04961, 21.4099, -3.91645, 25.0653, -12, 25, -12, 21, -11, 13, -9, -17 )
 
 [node name="Gun" parent="." instance=ExtResource( 6 )]
 visible = false

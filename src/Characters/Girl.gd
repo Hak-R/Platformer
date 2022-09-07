@@ -5,8 +5,8 @@ onready var bullet_object = preload("res://src/Objects/Bullet.tscn")
 onready var shoot_timer = $ShootTimer
 onready var mouse_position = Vector2.ZERO
 
-export var stomp_impulse: = 1300.0
-export var bullet_speed = 2000
+export var stomp_impulse: = 300.0
+export var bullet_speed = 600
 export var fire_rate = 0.4
 
 var can_fire = true
@@ -30,7 +30,7 @@ func _on_EnemyDetect_body_entered(body: Node) -> void:
 func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
-	var SNAP = Vector2.DOWN * 32 if direction .y == 0.0 else Vector2.ZERO
+	var SNAP = Vector2.DOWN if direction .y == 0.0 else Vector2.ZERO
 	mouse_position = get_global_mouse_position()
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	_velocity = move_and_slide_with_snap(_velocity, SNAP, FLOOR_NORMAL, true, 4, 0.9, false)
