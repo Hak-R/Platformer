@@ -9,11 +9,14 @@ export var stomp_impulse: = 300.0
 export var bullet_speed = 600
 export var fire_rate = 0.4
 
+var health = 10
+var max_health = 10
 var can_fire = true
 var max_jumps = 2
 var jump_count = 0
 var player_pos = Vector2.ZERO
 var in_air: bool = false
+var bullet_position = Vector2.ZERO
 
 func _on_EnemyDetect_area_entered(area: Area2D) -> void:
 	if "Bouncer" in area.name:
@@ -22,11 +25,15 @@ func _on_EnemyDetect_area_entered(area: Area2D) -> void:
 		_velocity = Vector2(0, 0)	
 	else:
 		_velocity = calculate_stomp_velocity(_velocity, stomp_impulse)
-	
+
 func _on_EnemyDetect_body_entered(body: Node) -> void:
-	die()
-		
-		
+	damage()
+	print(health)
+
+func _ready() -> void:
+	$"/root/PlayerData".player_health = health
+	health = 10
+
 func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
@@ -40,8 +47,9 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_floor():
 		jump_count = 0
-		
+
 func _process(delta: float) -> void:
+	bullet_position = $Player.position
 	player_pos = $Player.get_global_position()
 	$"/root/PlayerData".player_pos = player_pos
 	if global_position.y > cam_limit.limit_bottom:
@@ -61,6 +69,25 @@ func _process(delta: float) -> void:
 		
 	if (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left")) and in_air == false:
 		$AnimationPlayer.play("Run")
+	elif Input.is_action_pressed("crouch"):
+		$CollisionPlayer.disabled = true
+		$CollisionPlayer.visible = false
+		$EnemyDetect/CollisionLegs2.disabled = true
+		$EnemyDetect/CollisionLegs2.visible = false
+		$CollisionPlayerCrouch.disabled = false
+		$EnemyDetect/CollisionLegsCrouch2.disabled = false
+		bullet_position.y += 10
+		if Input.is_action_pressed("crouch") and Input.is_action_pressed("shoot"):
+			$AnimationPlayer.play("CrouchShoot")
+		else:
+			$AnimationPlayer.play("Crouch")
+	elif Input.is_action_just_released("crouch"):
+		$CollisionPlayer.disabled = false
+		$CollisionPlayer.visible = true
+		$EnemyDetect/CollisionLegs2.disabled = false
+		$EnemyDetect/CollisionLegs2.visible = true
+		$CollisionPlayerCrouch.disabled = true
+		$EnemyDetect/CollisionLegsCrouch2.disabled = true
 	elif Input.is_action_pressed("shoot"):
 		$AnimationPlayer.play("Shoot")
 	elif (!Input.is_action_pressed("move_left") or !Input.is_action_pressed("move_right")) and in_air == false:
@@ -68,21 +95,29 @@ func _process(delta: float) -> void:
 	else:
 		$AnimationPlayer.play("Jump")
 			
-#
-	if Input.is_action_pressed("shoot") and can_fire:
-		$AnimationPlayer.play("Shoot")
-		var bullet_shoot = bullet_object.instance()
-		bullet_shoot.position = $Gun.get_position()
-		bullet_shoot.rotation_degrees = $Gun.rotation_degrees
-		bullet_shoot.apply_impulse(Vector2(),Vector2(bullet_speed, 0).rotated($Gun.rotation))
-		bullet_shoot.get_node("AnimationPlayer").play("ShootBullet")
-		add_child(bullet_shoot)
-		can_fire = false
-		yield(get_tree().create_timer(fire_rate), "timeout")
-		bullet_shoot.queue_free()
-		can_fire = true
-		
-
+	if Input.is_action_pressed("shoot") and can_fire:	#SHOOTING SYSTEM
+		if $Player.flip_h == false:
+			var bullet_shoot = bullet_object.instance()
+			bullet_shoot.position = bullet_position
+			bullet_shoot.apply_impulse(Vector2(),Vector2(bullet_speed, -20))
+			bullet_shoot.get_node("AnimationPlayer").play("ShootBullet")
+			add_child(bullet_shoot)
+			can_fire = false
+			yield(get_tree().create_timer(fire_rate), "timeout")
+			bullet_shoot.queue_free()
+			can_fire = true
+		else:
+			var bullet_shoot = bullet_object.instance()
+			bullet_shoot.position = bullet_position
+			bullet_shoot.apply_impulse(Vector2(),Vector2(-bullet_speed, -20))
+			bullet_shoot.get_node("AnimationPlayer").play("ShootBullet")
+			add_child(bullet_shoot)
+			can_fire = false
+			yield(get_tree().create_timer(fire_rate), "timeout")
+			bullet_shoot.queue_free()
+			can_fire = true
+	
+	
 func get_direction() -> Vector2:
 	return  Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
@@ -113,3 +148,8 @@ func die() -> void:
 	PlayerData.death += 1
 	queue_free()
 
+func damage() -> void:
+	health -= 1
+	$"/root/PlayerData".player_health = health
+	if health == 0:
+		die()

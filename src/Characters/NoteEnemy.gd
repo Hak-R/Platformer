@@ -28,7 +28,6 @@ func _on_Stomp_body_entered(body: Node) -> void:
 	score_popup()
 	PlayerData.score += score
 	health -= damage_done
-	print(body)
 	if health <= 0:
 		destroy()
 	else:
@@ -45,19 +44,25 @@ func _process(delta: float) -> void:
 	if health < health / 2:
 		health_bar.tint_progress = Color(0.984314, 0, 0)
 	damage_done = damage[randi() % 2]
+	
 	playerr_pos = $"/root/PlayerData".player_pos
-	if playerr_pos.x - global_position.x > 0:
-		$enemy.scale.x = -1.0
-	else:
-		$enemy.scale.x = 1.0
+	if playerr_pos.x < global_position.x:
+		$enemy.flip_h = false
+		$CollisionPolygon2D.scale.x = 1.0
+		$Stomp.scale.x = 1.0
+	elif playerr_pos.x > global_position.x:
+		$enemy.flip_h = true
+		$CollisionPolygon2D.scale.x = -1.0
+		$Stomp.scale.x = -1.0
+		
 	if $ShootTimer.time_left == 0:
 		$ShootTimer.start(1.5)
 		var bullet_shoot = bullet_object.instance()
 		bullet_shoot.position = $enemy.get_position()
-		if playerr_pos.x - global_position.x > 0:
-			bullet_shoot.apply_impulse(Vector2(),Vector2(bullet_speed, (playerr_pos.y - global_position.y) * 2 ))
-		else:
-			bullet_shoot.apply_impulse(Vector2(),Vector2(-bullet_speed, (playerr_pos.y - global_position.y) * 2))
+		if playerr_pos.x < global_position.x:
+			bullet_shoot.apply_impulse(Vector2(),Vector2(-bullet_speed, 0))
+		elif playerr_pos.x > global_position.x:
+			bullet_shoot.apply_impulse(Vector2(),Vector2(bullet_speed, 0))
 		bullet_shoot.get_node("AnimationPlayer").play("ShootBullet")
 		add_child(bullet_shoot)
 		can_fire = false

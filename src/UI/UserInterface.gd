@@ -14,6 +14,10 @@ func _ready() -> void:
 	PlayerData.connect("score_updated", self, "update_interface")
 	PlayerData.connect("player_died", self, "_on_PlayerData_player_died")
 	update_interface()
+	
+func _process(delta: float) -> void:
+	$HealthBar/Health.set_text(str($"/root/PlayerData".player_health))
+	$HealthBar.value = $"/root/PlayerData".player_health
 
 
 func _on_Settings_button_up() -> void:
@@ -31,10 +35,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.paused = false
 		self.settings = false
 
-
 func update_interface() -> void:
 	score.text = "Score: %s" % PlayerData.score
-
 
 func set_paused(value: bool) -> void:
 	paused = value

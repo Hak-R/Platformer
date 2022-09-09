@@ -5,9 +5,11 @@ signal player_died
 
 var score: = 0 setget set_score
 var death: = 0 setget set_death
-
 var text_box = ""
 var player_pos: = Vector2.ZERO
+var player_health = 10
+var max_player_health = 10
+
 
 func reset() -> void:
 	score = 0
