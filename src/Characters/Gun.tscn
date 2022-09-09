@@ -1,21 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Characters/Gun.gd" type="Script" id=1]
-[ext_resource path="res://start-assets/player.png" type="Texture" id=2]
 [ext_resource path="res://start-assets/cannon.png" type="Texture" id=5]
 
 [node name="Gun" type="KinematicBody2D"]
+collision_layer = 0
 collision_mask = 0
 script = ExtResource( 1 )
 
-[node name="gun_player" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-
-[node name="cannon_collision" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 34, -47, 37, -47, 37, -46, 39, -46, 39, -45, 40, -45, 40, -44, 41, -44, 41, -43, 42, -43, 42, -42, 43, -42, 43, -41, 44, -41, 44, -40, 45, -40, 45, -39, 46, -39, 46, -37, 47, -37, 47, -34, 48, -34, 48, 34, 47, 34, 47, 37, 46, 37, 46, 39, 45, 39, 45, 40, 44, 40, 44, 41, 43, 41, 43, 42, 42, 42, 42, 43, 41, 43, 41, 44, 40, 44, 40, 45, 39, 45, 39, 46, 37, 46, 37, 47, 34, 47, 34, 48, -34, 48, -34, 47, -37, 47, -37, 46, -39, 46, -39, 45, -40, 45, -40, 44, -41, 44, -41, 43, -42, 43, -42, 42, -43, 42, -43, 41, -44, 41, -44, 40, -45, 40, -45, 39, -46, 39, -46, 37, -47, 37, -47, 34, -48, 34, -48, -34, -47, -34, -47, -37, -46, -37, -46, -39, -45, -39, -45, -40, -44, -40, -44, -41, -43, -41, -43, -42, -42, -42, -42, -43, -41, -43, -41, -44, -40, -44, -40, -45, -39, -45, -39, -46, -37, -46, -37, -47, -34, -47, -34, -48, 34, -48 )
-
 [node name="cannon" type="Sprite" parent="."]
-position = Vector2( 99, -2 )
-scale = Vector2( 0.316667, 0.316667 )
+position = Vector2( 21, 0 )
+scale = Vector2( 0.109167, 0.109167 )
 texture = ExtResource( 5 )
 offset = Vector2( -72.6316, 3.15789 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 13, 0 )
+scale = Vector2( 0.1, 0.1 )
+polygon = PoolVector2Array( 25.5, -27.6, 26.6, -26, 61.5, -26, 61.5, -23.7, 66.4, -18, 80.3, -18, 83.5, -14.8, 83.5, 12, 80.8, 12, 67.5, 13.8, 67.5, 14.8, 60.3, 22, 31.5, 22, 31.5, 22.8, 24.3, 30, -45.5, 30, -51.5, 22, -82.5, 22, -82.5, 19, -84.5, -18.1, -84.5, -20, -81.6, -20, -52.5, -21.9, -52.5, -22.9, -46.5, -27.9, -46.5, -30, 25.5, -30 )

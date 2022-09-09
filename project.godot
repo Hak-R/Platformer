@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Platformer"
-run/main_scene="res://src/Levels/Level1.tscn"
+run/main_scene="res://src/Levels/LevelHak.tscn"
 config/icon="res://start-assets/Brorio_Icon2.png"
 
 [autoload]

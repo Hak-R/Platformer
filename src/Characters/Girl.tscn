@@ -160,19 +160,6 @@ monitorable = false
 [node name="CollisionLegs2" type="CollisionPolygon2D" parent="EnemyDetect"]
 polygon = PoolVector2Array( 14, -16, 12.0104, 8.61619, 10.9661, 24.5431, 6.26632, 24.8042, -0.522193, 11.4883, -6.52742, 19.0601, -7.04961, 21.4099, -3.91645, 25.0653, -12, 25, -12, 21, -11, 13, -9, -17 )
 
-[node name="Gun" parent="." instance=ExtResource( 6 )]
-visible = false
-
-[node name="gun_player" parent="Gun" index="0"]
-visible = false
-
-[node name="cannon_collision" parent="Gun" index="1"]
-visible = false
-
-[node name="cannon" parent="Gun" index="2"]
-position = Vector2( 21, 0 )
-scale = Vector2( 0.0758335, 0.0758335 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
 reset_on_save = false
@@ -181,7 +168,8 @@ anims/Jump = SubResource( 6 )
 anims/Run = SubResource( 2 )
 anims/Shoot = SubResource( 5 )
 
+[node name="Gun" parent="." instance=ExtResource( 6 )]
+visible = false
+
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_EnemyDetect_area_entered"]
 [connection signal="body_entered" from="EnemyDetect" to="." method="_on_EnemyDetect_body_entered"]
-
-[editable path="Gun"]

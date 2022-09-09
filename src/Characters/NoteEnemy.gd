@@ -6,7 +6,7 @@ onready var health_bar = $enemy/HealthBar
 onready var health_text = $enemy/HealthBar/Health
 
 export var score: = 100
-export var bullet_speed = 2000
+export var bullet_speed = 1000
 export var fire_rate = 0.4
 export var health: = 10
 export var damage = [1,2]
@@ -28,6 +28,7 @@ func _on_Stomp_body_entered(body: Node) -> void:
 	score_popup()
 	PlayerData.score += score
 	health -= damage_done
+	print(body)
 	if health <= 0:
 		destroy()
 	else:
