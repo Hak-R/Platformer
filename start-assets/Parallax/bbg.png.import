@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/skill-foreground.png-127f120650cf21d85f8153e47214453d.stex"
+path="res://.import/bbg.png-63b3f6beca2d40402db9ea2f453391f0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://start-assets/Parallax/skill-foreground.png"
-dest_files=[ "res://.import/skill-foreground.png-127f120650cf21d85f8153e47214453d.stex" ]
+source_file="res://start-assets/Parallax/bbg.png"
+dest_files=[ "res://.import/bbg.png-63b3f6beca2d40402db9ea2f453391f0.stex" ]
 
 [params]
 
