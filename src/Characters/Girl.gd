@@ -71,10 +71,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		animation_tree.set("parameters/Movement/current", 0)
 		
 	if event.is_action_pressed("crouch"):
+		animation_tree.set("parameters/CrouchTransition/current", 0)
+		animation_tree.set("parameters/CrouchStartPhase/active", 1)
 		animation_tree.set("parameters/Movement/current", 2)
-		animation_tree.set("parameters/CrouchStartPhase/active", true)
 	if event.is_action_released("crouch"):
-		animation_tree.set("parameters/Movement/current", 0)
+		animation_tree.set("parameters/CrouchTransition/current", 1)
+		animation_tree.set("parameters/CrouchEndPhase/active", 1)
+		animation_tree.set("parameters/Movement/current", 2)
 		
 func _process(delta: float) -> void:
 	bullet_position = $Player.position
