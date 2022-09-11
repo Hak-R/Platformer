@@ -1,5 +1,8 @@
 extends Actor 
 
+onready var animation_tree = $AnimationTree
+onready var animation_mode = animation_tree.get("parameters/playback")
+
 onready var cam_limit: Camera2D = get_node("Camera2D")
 onready var bullet_object = preload("res://src/Objects/Bullet.tscn")
 onready var shoot_timer = $ShootTimer
@@ -33,6 +36,7 @@ func _on_EnemyDetect_body_entered(body: Node) -> void:
 func _ready() -> void:
 	$"/root/PlayerData".player_health = health
 	health = 10
+	animation_tree.active = true
 
 func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
@@ -48,54 +52,54 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		jump_count = 0
 
+func _unhandled_input(event: InputEvent) -> void:
+	var direction = get_direction()
+	
+	if event.is_action_pressed("move_right"):
+		animation_tree.set("parameters/RunStartPhase/active", 1)
+		animation_tree.set("parameters/Movement/current", 1)
+		animation_tree.set("parameters/Movement/current", 1)
+	if event.is_action_released("move_right"):
+		animation_tree.set("parameters/RunStopPhase/active", 1)
+		animation_tree.set("parameters/Movement/current", 0)
+		
+	if event.is_action_pressed("move_left"):
+		animation_tree.set("parameters/RunStartPhase/active", 1)
+		animation_tree.set("parameters/Movement/current", 1)
+	if event.is_action_released("move_left"):
+		animation_tree.set("parameters/RunStopPhase/active", 1)
+		animation_tree.set("parameters/Movement/current", 0)
+		
+	if event.is_action_pressed("crouch"):
+		animation_tree.set("parameters/Movement/current", 2)
+		animation_tree.set("parameters/CrouchStartPhase/active", true)
+	if event.is_action_released("crouch"):
+		animation_tree.set("parameters/Movement/current", 0)
+		
 func _process(delta: float) -> void:
 	bullet_position = $Player.position
 	player_pos = $Player.get_global_position()
 	$"/root/PlayerData".player_pos = player_pos
 	if global_position.y > cam_limit.limit_bottom:
 		die()
-
+	
+	if is_on_floor():
+		animation_tree.set("parameters/in_air/current", 0)
+	elif !is_on_floor():
+		animation_tree.set("parameters/in_air/current", 1)
+		
 	if Input.is_action_pressed("move_right"):
 		$Player.flip_h = false
 		$Legs.flip_h = false
 	if Input.is_action_pressed("move_left"):
 		$Player.flip_h = true
 		$Legs.flip_h = true
-	
-	if is_on_floor():
-		in_air = false
-	else:
-		in_air = true
-		
-	if (Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left")) and in_air == false:
-		$AnimationPlayer.play("Run")
-	elif Input.is_action_pressed("crouch"):
-		$CollisionPlayer.disabled = true
-		$CollisionPlayer.visible = false
-		$EnemyDetect/CollisionLegs2.disabled = true
-		$EnemyDetect/CollisionLegs2.visible = false
-		$CollisionPlayerCrouch.disabled = false
-		$EnemyDetect/CollisionLegsCrouch2.disabled = false
-		bullet_position.y += 10
-		if Input.is_action_pressed("crouch") and Input.is_action_pressed("shoot"):
-			$AnimationPlayer.play("CrouchShoot")
-		else:
-			$AnimationPlayer.play("Crouch")
-	elif Input.is_action_just_released("crouch"):
-		$CollisionPlayer.disabled = false
-		$CollisionPlayer.visible = true
-		$EnemyDetect/CollisionLegs2.disabled = false
-		$EnemyDetect/CollisionLegs2.visible = true
-		$CollisionPlayerCrouch.disabled = true
-		$EnemyDetect/CollisionLegsCrouch2.disabled = true
-	elif Input.is_action_pressed("shoot"):
-		$AnimationPlayer.play("Shoot")
-	elif (!Input.is_action_pressed("move_left") or !Input.is_action_pressed("move_right")) and in_air == false:
-		$AnimationPlayer.play("Idle")
-	else:
-		$AnimationPlayer.play("Jump")
-			
+
+	if Input.is_action_pressed("shoot"):
+		animation_tree.set("parameters/Shoot/active", 1)
+
 	if Input.is_action_pressed("shoot") and can_fire:	#SHOOTING SYSTEM
+		
 		if $Player.flip_h == false:
 			var bullet_shoot = bullet_object.instance()
 			bullet_shoot.position = bullet_position
@@ -116,7 +120,6 @@ func _process(delta: float) -> void:
 			yield(get_tree().create_timer(fire_rate), "timeout")
 			bullet_shoot.queue_free()
 			can_fire = true
-	
 	
 func get_direction() -> Vector2:
 	return  Vector2(

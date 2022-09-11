@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://src/Characters/Girl.gd" type="Script" id=1]
 [ext_resource path="res://start-assets/Nera/sprites/legs/idle/leg_idle.png" type="Texture" id=2]
@@ -38,6 +38,20 @@
 [ext_resource path="res://start-assets/Nera/sprites/legs/crouch shoot/crouch_shoot3.png" type="Texture" id=36]
 [ext_resource path="res://start-assets/Nera/sprites/legs/crouch shoot/crouch_shoot2.png" type="Texture" id=37]
 [ext_resource path="res://start-assets/Nera/sprites/legs/crouch shoot/crouch_shoot4.png" type="Texture" id=38]
+[ext_resource path="res://start-assets/Nera/sprites/torso/shoot/shoot0.png" type="Texture" id=39]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run start/torso_run_start1.png" type="Texture" id=40]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run end/leg_run_end1.png" type="Texture" id=41]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run start/leg_run_start1.png" type="Texture" id=42]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run start/leg_run_start0.png" type="Texture" id=43]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run stop/torso_run_stop.png" type="Texture" id=44]
+[ext_resource path="res://start-assets/Nera/sprites/legs/run end/leg_run_end0.png" type="Texture" id=45]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run stop/torso_run_stop0.png" type="Texture" id=46]
+[ext_resource path="res://start-assets/Nera/sprites/torso/run start/torso_run_start0.png" type="Texture" id=47]
+[ext_resource path="res://start-assets/Nera/sprites/legs/crouch start/crouch_start0.png" type="Texture" id=48]
+[ext_resource path="res://start-assets/Nera/sprites/legs/crouch start/crouch_start2.png" type="Texture" id=49]
+[ext_resource path="res://start-assets/Nera/sprites/legs/crouch start/crouch_start1.png" type="Texture" id=50]
+[ext_resource path="res://start-assets/Nera/sprites/legs/crouch start/crouch_start3.png" type="Texture" id=51]
+[ext_resource path="res://start-assets/Nera/sprites/legs/crouch start/crouch_start4.png" type="Texture" id=52]
 
 [sub_resource type="Animation" id=7]
 resource_name = "Crouch"
@@ -81,7 +95,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.104552, 0.204252, 0.299147 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ null, null, null, null ]
 }
 tracks/1/type = "value"
@@ -97,10 +111,9 @@ tracks/1/keys = {
 "values": [ ExtResource( 35 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 38 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Idle"
-loop = true
-step = 0.333333
+[sub_resource type="Animation" id=50]
+resource_name = "CrouchStart"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Player:texture")
 tracks/0/interp = 1
@@ -108,8 +121,37 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.333333, 0.666667, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ null, null, null, null, null ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Legs:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 48 ), ExtResource( 50 ), ExtResource( 49 ), ExtResource( 51 ), ExtResource( 52 ) ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "Idle"
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 0.241484, 3.36358, 0.329877, 4.14106 ),
 "update": 1,
 "values": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 16 ), ExtResource( 3 ) ]
 }
@@ -120,7 +162,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.333333, 0.666667, 1 ),
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
@@ -144,10 +186,10 @@ tracks/0/keys = {
 "values": [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 10 ), ExtResource( 17 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=38]
 resource_name = "Run"
 loop = true
-step = 0.142857
+step = 0.125
 tracks/0/type = "value"
 tracks/0/path = NodePath("Player:texture")
 tracks/0/interp = 1
@@ -155,7 +197,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.142857, 0.285714, 0.428571, 0.571429, 0.714286, 0.857143, 1 ),
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 31 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 15 ) ]
@@ -167,16 +209,15 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.143, 0.286, 0.429, 0.572, 0.715, 0.858, 1.001 ),
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 28 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 26 ), ExtResource( 22 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Shoot"
-length = 0.3
-step = 0.333333
+[sub_resource type="Animation" id=44]
+resource_name = "RunStart"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Player:texture")
 tracks/0/interp = 1
@@ -184,11 +225,184 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.104552, 0.204252, 0.299147 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 47 ), ExtResource( 40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Legs:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 43 ), ExtResource( 42 ) ]
+}
+
+[sub_resource type="Animation" id=45]
+resource_name = "RunStop"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 46 ), ExtResource( 44 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Legs:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 45 ), ExtResource( 41 ) ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "Run_Shoot"
+length = 0.5
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
+"update": 1,
+"values": [ ExtResource( 39 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Shoot"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 5.09824, 0.5, 0.420448, 0.392292 ),
+"update": 1,
 "values": [ ExtResource( 21 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ) ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "Crouch"
+
+[sub_resource type="AnimationNodeAnimation" id=52]
+animation = "CrouchStart"
+
+[sub_resource type="AnimationNodeOneShot" id=51]
+fadein_time = 60.0
+fadeout_time = 60.0
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeTransition" id=28]
+input_count = 3
+input_0/name = "idle"
+input_0/auto_advance = false
+input_1/name = "run"
+input_1/auto_advance = false
+input_2/name = "crouch"
+input_2/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "RunStart"
+
+[sub_resource type="AnimationNodeOneShot" id=46]
+fadein_time = 60.0
+fadeout_time = 60.0
+
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "RunStop"
+
+[sub_resource type="AnimationNodeOneShot" id=47]
+fadein_time = 60.0
+fadeout_time = 60.0
+
+[sub_resource type="AnimationNodeOneShot" id=42]
+filter_enabled = true
+filters = [ "Player:flip_h", "Player:texture" ]
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "Run_Shoot"
+
+[sub_resource type="AnimationNodeTransition" id=36]
+input_count = 2
+input_0/name = "on_floor"
+input_0/auto_advance = false
+input_1/name = "in_air"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=29]
+graph_offset = Vector2( -1114.68, -113.529 )
+nodes/Crouch/node = SubResource( 43 )
+nodes/Crouch/position = Vector2( -620, 240 )
+nodes/CrouchStart/node = SubResource( 52 )
+nodes/CrouchStart/position = Vector2( -640, 120 )
+nodes/CrouchStartPhase/node = SubResource( 51 )
+nodes/CrouchStartPhase/position = Vector2( -360, 120 )
+nodes/Idle/node = SubResource( 26 )
+nodes/Idle/position = Vector2( -620, -400 )
+nodes/Jump/node = SubResource( 35 )
+nodes/Jump/position = Vector2( -620, 660 )
+nodes/Movement/node = SubResource( 28 )
+nodes/Movement/position = Vector2( -80, -120 )
+nodes/Run/node = SubResource( 25 )
+nodes/Run/position = Vector2( -620, -140 )
+nodes/RunStart/node = SubResource( 48 )
+nodes/RunStart/position = Vector2( -620, -20 )
+nodes/RunStartPhase/node = SubResource( 46 )
+nodes/RunStartPhase/position = Vector2( -360, -120 )
+nodes/RunStop/node = SubResource( 49 )
+nodes/RunStop/position = Vector2( -620, -280 )
+nodes/RunStopPhase/node = SubResource( 47 )
+nodes/RunStopPhase/position = Vector2( -360, -360 )
+nodes/Shoot/node = SubResource( 42 )
+nodes/Shoot/position = Vector2( 605.229, 14.9603 )
+nodes/ShootAnimation/node = SubResource( 40 )
+nodes/ShootAnimation/position = Vector2( 260, 340 )
+nodes/in_air/node = SubResource( 36 )
+nodes/in_air/position = Vector2( 260, -40 )
+nodes/output/position = Vector2( 980, 120 )
+node_connections = [ "in_air", 0, "Movement", "in_air", 1, "Jump", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchStartPhase", "Shoot", 0, "in_air", "Shoot", 1, "ShootAnimation", "output", 0, "Shoot", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch" ]
+
+[sub_resource type="AnimationNodeBlendTree" id=30]
+graph_offset = Vector2( -205.65, 31.1604 )
+
+[sub_resource type="AnimationNodeStateMachine" id=13]
+states/BlendTree/node = SubResource( 30 )
+states/BlendTree/position = Vector2( 227, 69 )
+graph_offset = Vector2( -643, -139 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
 [node name="Girl" type="KinematicBody2D"]
 collision_mask = 138
@@ -202,14 +416,16 @@ position = Vector2( 10, -8 )
 offset = Vector2( -10, 8 )
 
 [node name="CollisionPlayer" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( 5, -17.6, 7.8329, -15.9269, 10.705, -16.4491, 13.0548, -14.6214, 13.3159, -10.4439, 11, -7, 11, -3, 4, 1, 4, 6, 12, 25, 0, 26, -12, 25, -6, 7, -8.87728, -10.1828, -7.3107, -13.8381, -5, -17.6, -3.13316, -18.0157, 2.87206, -18.0157 )
 
 [node name="CollisionPlayerCrouch" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( -1, -8, 1, -9, 5, -9, 7, -9, 8, -8, 12, -7, 17, -7, 15, 6, 7, 10, 15, 25, 0, 25, -16, 25, -11, 19, -5, 12, -4, 7, -5, 0, -4, -3 )
 disabled = true
 
 [node name="Legs" type="Sprite" parent="."]
-texture = ExtResource( 34 )
+texture = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -222,6 +438,7 @@ smoothing_speed = 10.0
 drag_margin_right = 0.0
 
 [node name="EnemyDetect" type="Area2D" parent="."]
+visible = false
 collision_mask = 130
 monitorable = false
 
@@ -233,14 +450,33 @@ polygon = PoolVector2Array( -1, -8, 1, -9, 5, -9, 7, -9, 8, -8, 12, -7, 17, -7, 
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
 reset_on_save = false
 anims/Crouch = SubResource( 7 )
 anims/CrouchShoot = SubResource( 8 )
-anims/Idle = SubResource( 1 )
+anims/CrouchStart = SubResource( 50 )
+anims/Idle = SubResource( 37 )
 anims/Jump = SubResource( 6 )
-anims/Run = SubResource( 2 )
+anims/Run = SubResource( 38 )
+anims/RunStart = SubResource( 44 )
+anims/RunStop = SubResource( 45 )
+anims/Run_Shoot = SubResource( 39 )
 anims/Shoot = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 29 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/CrouchStartPhase/active = false
+parameters/Movement/current = 2
+parameters/RunStartPhase/active = false
+parameters/RunStopPhase/active = false
+parameters/Shoot/active = false
+parameters/in_air/current = 0
+
+[node name="AnimationTree2" type="AnimationTree" parent="."]
+tree_root = SubResource( 13 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 24 )
 
 [node name="Gun" parent="." instance=ExtResource( 6 )]
 visible = false
