@@ -20,6 +20,8 @@ var jump_count = 0
 var player_pos = Vector2.ZERO
 var in_air: bool = false
 var bullet_position = Vector2.ZERO
+var can_crouch = true
+var can_jump = true
 
 func _on_EnemyDetect_area_entered(area: Area2D) -> void:
 	if "Bouncer" in area.name:
@@ -42,6 +44,8 @@ func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
 	var SNAP = Vector2.DOWN if direction .y == 0.0 else Vector2.ZERO
+	if can_jump == false:
+		is_jump_interrupted = true
 	mouse_position = get_global_mouse_position()
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 	_velocity = move_and_slide_with_snap(_velocity, SNAP, FLOOR_NORMAL, true, 4, 0.9, false)
@@ -49,35 +53,20 @@ func _physics_process(delta: float) -> void:
 		_velocity.y = -speed.y
 		jump_count += 1
 
+
 	if is_on_floor():
 		jump_count = 0
 
 func _unhandled_input(event: InputEvent) -> void:
-	var direction = get_direction()
 	
-	if event.is_action_pressed("move_right"):
+	if event.is_action_pressed("move_right") or event.is_action_pressed("move_left"):
+		can_crouch = false
 		animation_tree.set("parameters/RunStartPhase/active", 1)
 		animation_tree.set("parameters/Movement/current", 1)
-		animation_tree.set("parameters/Movement/current", 1)
-	if event.is_action_released("move_right"):
+	if event.is_action_released("move_right") or event.is_action_released("move_left"):
+		can_crouch = true
 		animation_tree.set("parameters/RunStopPhase/active", 1)
 		animation_tree.set("parameters/Movement/current", 0)
-		
-	if event.is_action_pressed("move_left"):
-		animation_tree.set("parameters/RunStartPhase/active", 1)
-		animation_tree.set("parameters/Movement/current", 1)
-	if event.is_action_released("move_left"):
-		animation_tree.set("parameters/RunStopPhase/active", 1)
-		animation_tree.set("parameters/Movement/current", 0)
-		
-	if event.is_action_pressed("crouch"):
-		animation_tree.set("parameters/CrouchTransition/current", 0)
-		animation_tree.set("parameters/CrouchStartPhase/active", 1)
-		animation_tree.set("parameters/Movement/current", 2)
-	if event.is_action_released("crouch"):
-		animation_tree.set("parameters/CrouchTransition/current", 1)
-		animation_tree.set("parameters/CrouchEndPhase/active", 1)
-		animation_tree.set("parameters/Movement/current", 2)
 		
 func _process(delta: float) -> void:
 	bullet_position = $Player.position
@@ -85,10 +74,23 @@ func _process(delta: float) -> void:
 	$"/root/PlayerData".player_pos = player_pos
 	if global_position.y > cam_limit.limit_bottom:
 		die()
+		
+	if can_crouch:
+		if Input.is_action_pressed("crouch"):
+			can_jump = false
+			animation_tree.set("parameters/CrouchTransition/current", 0)
+			animation_tree.set("parameters/CrouchStartPhase/active", 1)
+			animation_tree.set("parameters/Movement/current", 2)
+		if Input.is_action_just_released("crouch"):
+			can_jump = true
+			animation_tree.set("parameters/CrouchTransition/current", 1)
+			animation_tree.set("parameters/CrouchEndPhase/active", 1)
+			animation_tree.set("parameters/Movement/current", 2)
 	
 	if is_on_floor():
 		animation_tree.set("parameters/in_air/current", 0)
 	elif !is_on_floor():
+		animation_tree.set("parameters/RunStopPhase/active", 1)
 		animation_tree.set("parameters/in_air/current", 1)
 		
 	if Input.is_action_pressed("move_right"):
