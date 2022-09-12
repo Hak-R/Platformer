@@ -32,8 +32,8 @@ func _on_EnemyDetect_area_entered(area: Area2D) -> void:
 		_velocity = calculate_stomp_velocity(_velocity, stomp_impulse)
 
 func _on_EnemyDetect_body_entered(body: Node) -> void:
+	animation_tree.set("parameters/Hurt/active", 1)
 	damage()
-	print(health)
 
 func _ready() -> void:
 	$"/root/PlayerData".player_health = health
@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		jump_count = 0
 
 func _unhandled_input(event: InputEvent) -> void:
-	
+		
 	if event.is_action_pressed("move_right") or event.is_action_pressed("move_left"):
 		can_crouch = false
 		animation_tree.set("parameters/RunStartPhase/active", 1)
@@ -74,6 +74,9 @@ func _process(delta: float) -> void:
 	$"/root/PlayerData".player_pos = player_pos
 	if global_position.y > cam_limit.limit_bottom:
 		die()
+		
+	if Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left"):
+		animation_tree.set("parameters/Movement/current", 0)
 		
 	if can_crouch:
 		if Input.is_action_pressed("crouch"):

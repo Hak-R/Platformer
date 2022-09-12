@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://src/Characters/Girl.gd" type="Script" id=1]
 [ext_resource path="res://start-assets/Nera/sprites/legs/idle/leg_idle.png" type="Texture" id=2]
@@ -56,6 +56,10 @@
 [ext_resource path="res://start-assets/Nera/sprites/legs/crouch end/crouch_end1.png" type="Texture" id=54]
 [ext_resource path="res://start-assets/Nera/sprites/legs/crouch end/crouch_end2.png" type="Texture" id=55]
 [ext_resource path="res://start-assets/Nera/sprites/legs/crouch end/crouch_end3.png" type="Texture" id=56]
+[ext_resource path="res://start-assets/Nera/sprites/legs/hurt ground/hurt_ground1.png" type="Texture" id=57]
+[ext_resource path="res://start-assets/Nera/sprites/legs/hurt ground/hurt_ground4.png" type="Texture" id=58]
+[ext_resource path="res://start-assets/Nera/sprites/legs/hurt ground/hurt_ground2.png" type="Texture" id=59]
+[ext_resource path="res://start-assets/Nera/sprites/legs/hurt ground/hurt_ground3.png" type="Texture" id=60]
 
 [sub_resource type="Animation" id=7]
 resource_name = "Crouch"
@@ -171,6 +175,34 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 48 ), ExtResource( 50 ), ExtResource( 49 ), ExtResource( 51 ), ExtResource( 52 ) ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "Hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Player:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 57 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 58 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Legs:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
 }
 
 [sub_resource type="Animation" id=37]
@@ -339,6 +371,8 @@ tracks/0/keys = {
 "values": [ ExtResource( 21 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ) ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=62]
+
 [sub_resource type="AnimationNodeAnimation" id=43]
 animation = "Idle"
 
@@ -368,6 +402,11 @@ input_0/name = "start"
 input_0/auto_advance = false
 input_1/name = "end"
 input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeOneShot" id=63]
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "Hurt"
 
 [sub_resource type="AnimationNodeAnimation" id=26]
 animation = "Idle"
@@ -423,7 +462,9 @@ input_1/name = "in_air"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=29]
-graph_offset = Vector2( -845.187, -188.606 )
+graph_offset = Vector2( -308.655, -294.861 )
+nodes/Animation/node = SubResource( 62 )
+nodes/Animation/position = Vector2( -846.969, -91.0557 )
 nodes/Crouch/node = SubResource( 43 )
 nodes/Crouch/position = Vector2( -840, 540 )
 nodes/Crouch2/node = SubResource( 55 )
@@ -433,13 +474,17 @@ nodes/CrouchEnd/position = Vector2( -840, 400 )
 nodes/CrouchEndPhase/node = SubResource( 56 )
 nodes/CrouchEndPhase/position = Vector2( -580, 440 )
 nodes/CrouchShoot/node = SubResource( 59 )
-nodes/CrouchShoot/position = Vector2( 100, 420 )
+nodes/CrouchShoot/position = Vector2( 13.3333, 426.667 )
 nodes/CrouchStart/node = SubResource( 52 )
 nodes/CrouchStart/position = Vector2( -840, 100 )
 nodes/CrouchStartPhase/node = SubResource( 57 )
 nodes/CrouchStartPhase/position = Vector2( -580, 160 )
 nodes/CrouchTransition/node = SubResource( 58 )
 nodes/CrouchTransition/position = Vector2( -300, 240 )
+nodes/Hurt/node = SubResource( 63 )
+nodes/Hurt/position = Vector2( 773.333, 40 )
+nodes/HurtAnimation/node = SubResource( 64 )
+nodes/HurtAnimation/position = Vector2( 520, 333.333 )
 nodes/Idle/node = SubResource( 26 )
 nodes/Idle/position = Vector2( -620, -400 )
 nodes/Jump/node = SubResource( 35 )
@@ -449,7 +494,7 @@ nodes/Movement/position = Vector2( -80, -120 )
 nodes/Run/node = SubResource( 25 )
 nodes/Run/position = Vector2( -620, -140 )
 nodes/RunShoot/node = SubResource( 40 )
-nodes/RunShoot/position = Vector2( 100, 280 )
+nodes/RunShoot/position = Vector2( 26.6667, 293.333 )
 nodes/RunStart/node = SubResource( 48 )
 nodes/RunStart/position = Vector2( -620, -20 )
 nodes/RunStartPhase/node = SubResource( 46 )
@@ -459,13 +504,13 @@ nodes/RunStop/position = Vector2( -620, -280 )
 nodes/RunStopPhase/node = SubResource( 47 )
 nodes/RunStopPhase/position = Vector2( -360, -360 )
 nodes/Shoot/node = SubResource( 42 )
-nodes/Shoot/position = Vector2( 605.229, 14.9603 )
+nodes/Shoot/position = Vector2( 520, 26.6667 )
 nodes/ShootAnimation/node = SubResource( 60 )
-nodes/ShootAnimation/position = Vector2( 380, 320 )
+nodes/ShootAnimation/position = Vector2( 253.333, 226.667 )
 nodes/in_air/node = SubResource( 36 )
 nodes/in_air/position = Vector2( 260, -40 )
 nodes/output/position = Vector2( 980, 120 )
-node_connections = [ "in_air", 0, "Movement", "in_air", 1, "Jump", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "Shoot", 0, "in_air", "Shoot", 1, "ShootAnimation", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "output", 0, "Shoot", "ShootAnimation", 0, "RunShoot", "ShootAnimation", 1, "CrouchShoot" ]
+node_connections = [ "output", 0, "Hurt", "in_air", 0, "Movement", "in_air", 1, "Jump", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "Shoot", 0, "in_air", "Shoot", 1, "ShootAnimation", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "ShootAnimation", 0, "RunShoot", "ShootAnimation", 1, "CrouchShoot", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation" ]
 
 [sub_resource type="AnimationNodeBlendTree" id=30]
 graph_offset = Vector2( -205.65, 31.1604 )
@@ -486,7 +531,7 @@ one_shot = true
 
 [node name="Player" type="Sprite" parent="."]
 position = Vector2( 10, -8 )
-texture = ExtResource( 5 )
+texture = ExtResource( 3 )
 offset = Vector2( -10, 8 )
 
 [node name="CollisionPlayer" type="CollisionPolygon2D" parent="."]
@@ -529,6 +574,7 @@ anims/Crouch = SubResource( 7 )
 anims/CrouchEnd = SubResource( 53 )
 anims/CrouchShoot = SubResource( 8 )
 anims/CrouchStart = SubResource( 50 )
+anims/Hurt = SubResource( 61 )
 anims/Idle = SubResource( 37 )
 anims/Jump = SubResource( 6 )
 anims/Run = SubResource( 38 )
@@ -544,6 +590,7 @@ active = true
 parameters/CrouchEndPhase/active = false
 parameters/CrouchStartPhase/active = false
 parameters/CrouchTransition/current = 1
+parameters/Hurt/active = false
 parameters/Movement/current = 0
 parameters/RunStartPhase/active = false
 parameters/RunStopPhase/active = false

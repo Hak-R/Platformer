@@ -509,7 +509,7 @@ smoothing_speed = 20.0
 
 [node name="AnimationTree" parent="Girl" index="8"]
 parameters/CrouchTransition/current = 0
-parameters/ShootAnimation/current = 0
+parameters/Hurt/active = false
 
 [node name="AnimationTree2" parent="Girl" index="9"]
 parameters/playback = SubResource( 49 )
