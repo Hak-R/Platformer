@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://src/Characters/Girl.gd" type="Script" id=1]
 [ext_resource path="res://start-assets/Nera/sprites/legs/idle/leg_idle.png" type="Texture" id=2]
@@ -510,17 +510,7 @@ nodes/ShootAnimation/position = Vector2( 253.333, 226.667 )
 nodes/in_air/node = SubResource( 36 )
 nodes/in_air/position = Vector2( 260, -40 )
 nodes/output/position = Vector2( 980, 120 )
-node_connections = [ "output", 0, "Hurt", "in_air", 0, "Movement", "in_air", 1, "Jump", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "Shoot", 0, "in_air", "Shoot", 1, "ShootAnimation", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "ShootAnimation", 0, "RunShoot", "ShootAnimation", 1, "CrouchShoot", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation" ]
-
-[sub_resource type="AnimationNodeBlendTree" id=30]
-graph_offset = Vector2( -205.65, 31.1604 )
-
-[sub_resource type="AnimationNodeStateMachine" id=13]
-states/BlendTree/node = SubResource( 30 )
-states/BlendTree/position = Vector2( 227, 69 )
-graph_offset = Vector2( -643, -139 )
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
+node_connections = [ "output", 0, "Hurt", "in_air", 0, "Movement", "in_air", 1, "Jump", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "Shoot", 0, "in_air", "Shoot", 1, "ShootAnimation", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "ShootAnimation", 0, "RunShoot", "ShootAnimation", 1, "CrouchShoot", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase" ]
 
 [node name="Girl" type="KinematicBody2D"]
 collision_mask = 138
@@ -597,11 +587,6 @@ parameters/RunStopPhase/active = false
 parameters/Shoot/active = false
 parameters/ShootAnimation/current = 0
 parameters/in_air/current = 0
-
-[node name="AnimationTree2" type="AnimationTree" parent="."]
-tree_root = SubResource( 13 )
-anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 24 )
 
 [node name="Gun" parent="." instance=ExtResource( 6 )]
 visible = false

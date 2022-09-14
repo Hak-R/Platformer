@@ -68,6 +68,7 @@ physics_process_parent = true
 modulate = Color( 0.65098, 0.0509804, 0.92549, 1 )
 position = Vector2( 0, -61 )
 collision_layer = 2
+collision_mask = 65
 priority = 1.0
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Stomp"]

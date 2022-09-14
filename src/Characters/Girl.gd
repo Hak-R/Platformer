@@ -22,6 +22,7 @@ var in_air: bool = false
 var bullet_position = Vector2.ZERO
 var can_crouch = true
 var can_jump = true
+var bullet_collision = false
 
 func _on_EnemyDetect_area_entered(area: Area2D) -> void:
 	if "Bouncer" in area.name:
@@ -58,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		jump_count = 0
 
 func _unhandled_input(event: InputEvent) -> void:
-		
+	
 	if event.is_action_pressed("move_right") or event.is_action_pressed("move_left"):
 		can_crouch = false
 		animation_tree.set("parameters/RunStartPhase/active", 1)
@@ -69,13 +70,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		animation_tree.set("parameters/Movement/current", 0)
 		
 func _process(delta: float) -> void:
-	bullet_position = $Player.position
 	player_pos = $Player.get_global_position()
 	$"/root/PlayerData".player_pos = player_pos
+	var direction = get_direction()
 	if global_position.y > cam_limit.limit_bottom:
 		die()
-		
-	if Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left"):
+
+	if direction.x == 0:
 		animation_tree.set("parameters/Movement/current", 0)
 		
 	if can_crouch:
@@ -105,9 +106,9 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_pressed("shoot"):
 		animation_tree.set("parameters/Shoot/active", 1)
-
-	if Input.is_action_pressed("shoot") and can_fire:	#SHOOTING SYSTEM
 		
+	if Input.is_action_pressed("shoot") and can_fire:	#SHOOTING SYSTEM
+		bullet_position = $Player.position
 		if $Player.flip_h == false:
 			var bullet_shoot = bullet_object.instance()
 			bullet_shoot.position = bullet_position
@@ -128,7 +129,8 @@ func _process(delta: float) -> void:
 			yield(get_tree().create_timer(fire_rate), "timeout")
 			bullet_shoot.queue_free()
 			can_fire = true
-	
+		
+
 func get_direction() -> Vector2:
 	return  Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
