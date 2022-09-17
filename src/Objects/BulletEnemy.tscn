@@ -37,6 +37,7 @@ tracks/1/keys = {
 [node name="BulletEnemy" type="RigidBody2D"]
 modulate = Color( 1, 1, 1, 0 )
 collision_layer = 128
+collision_mask = 0
 continuous_cd = 2
 contacts_reported = 1
 contact_monitor = true
