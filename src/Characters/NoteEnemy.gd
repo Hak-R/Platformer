@@ -58,9 +58,6 @@ func _process(delta: float) -> void:
 	if $ShootTimer.time_left == 0:
 		$ShootTimer.start(1.5)
 		var bullet_shoot = bullet_object.instance()
-#		print(bullet_shoot.get_node("Circle").visible)
-#		print(bullet_shoot.collision_layer)
-#		print(bullet_shoot.collision_mask)
 		bullet_shoot.position = $enemy.get_position()
 		if playerr_pos.x < global_position.x:
 			bullet_shoot.apply_impulse(Vector2(),Vector2(-bullet_speed, 0))
@@ -70,9 +67,6 @@ func _process(delta: float) -> void:
 		add_child(bullet_shoot)
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
-#		print(bullet_shoot.get_node("Circle").visible)
-#		print(bullet_shoot.collision_layer)
-#		print(bullet_shoot.collision_mask)
 		bullet_shoot.queue_free()
 		can_fire = true
 		

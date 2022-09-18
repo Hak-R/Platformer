@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	var direction: = get_direction()
 	var SNAP = Vector2.DOWN if direction .y == 0.0 else Vector2.ZERO
-	if can_jump == false:
+	if animation_tree.get("parameters/Movement/current") == 2 and is_on_floor():
 		is_jump_interrupted = true
 	mouse_position = get_global_mouse_position()
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)

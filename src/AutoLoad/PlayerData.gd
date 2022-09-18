@@ -10,8 +10,6 @@ var player_pos: = Vector2.ZERO
 var player_health = 10
 var max_player_health = 10
 
-#func _ready():
-#	OS.window_fullscreen = true
 
 func reset() -> void:
 	score = 0

@@ -5,6 +5,9 @@
 
 [node name="FloatingText2" type="Position2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_left = 0.5
@@ -21,4 +24,5 @@ text = "TEST"
 [node name="Tween" type="Tween" parent="."]
 
 [node name="FloatTimer" type="Timer" parent="."]
+wait_time = 3.0
 one_shot = true

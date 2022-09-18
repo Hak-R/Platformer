@@ -4,7 +4,7 @@
 [ext_resource path="res://start-assets/Enemy/Ghoul Sprite Sheet.png" type="Texture" id=2]
 [ext_resource path="res://start-assets/health_base.png" type="Texture" id=3]
 [ext_resource path="res://start-assets/health_progress.png" type="Texture" id=4]
-[ext_resource path="res://start-assets/Fonts/font_popup.tres" type="DynamicFont" id=5]
+[ext_resource path="res://start-assets/Fonts/font_health.tres" type="DynamicFont" id=5]
 
 [sub_resource type="Animation" id=2]
 resource_name = "Attack"
@@ -110,28 +110,25 @@ collision_mask = 73
 script = ExtResource( 1 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
-position = Vector2( 18, -11 )
+position = Vector2( 3.33334, -16.6667 )
 scale = Vector2( 0.77, 1.33333 )
 rect = Rect2( -50, -61, 100, 60 )
 process_parent = true
 physics_process_parent = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
-position = Vector2( 2, -2 )
-polygon = PoolVector2Array( 59, -91.9, 59, -88, 58, -88, 58, -25, 18, -25, 18, -21, 17, -21, 17, 93.2, 18.4, 94.5, 17.3, 97, 15, 97, -58, 98, -58, 9, -17, 9, -17, -94.1 )
+position = Vector2( -10, -36.6667 )
+polygon = PoolVector2Array( 50, -93.3333, 50, -43.3333, 63.3333, -30, 86.6667, 0, 96.6667, 26.6667, 53.3333, 23.3333, 40, -13.3333, 36.6667, 36.6667, -36.6667, 36.6667, -60, 10, -60, -6.66667, -13.3333, -50, -26.6667, -90 )
 
 [node name="Stomp" type="Area2D" parent="."]
-visible = false
 modulate = Color( 0.65098, 0.0509804, 0.92549, 1 )
 position = Vector2( 0, -61 )
 collision_layer = 2
 priority = 1.0
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Stomp"]
-position = Vector2( 2, 59 )
-polygon = PoolVector2Array( 59, -91.9, 59, -88, 58, -88, 58, -25, 18, -25, 18, -21, 17, -21, 17, 93.2, 18.4, 94.5, 17.3, 97, 15, 97, -58, 98, -58, 9, -17, 9, -17, -94.1 )
+position = Vector2( -10, 24.3333 )
+polygon = PoolVector2Array( 50, -93.3333, 50, -43.3333, 63.3333, -30, 86.6667, 0, 96.6667, 26.6667, 53.3333, 23.3333, 40, -13.3333, 36.6667, 36.6667, -36.6667, 36.6667, -60, 10, -60, -6.66667, -13.3333, -50, -26.6667, -90 )
 
 [node name="ghoul" type="Sprite" parent="."]
 position = Vector2( 3.33333, -90 )
