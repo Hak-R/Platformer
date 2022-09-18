@@ -1,16 +1,15 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://start-assets/TileSet/tileset.png" type="Texture" id=1]
 [ext_resource path="res://src/Characters/NoteEnemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://start-assets/Parallax/bg.png" type="Texture" id=3]
-[ext_resource path="res://start-assets/background4.jpg" type="Texture" id=4]
+[ext_resource path="res://start-assets/Nera/sprites/legs/crouch idle/crouch_idle1.png" type="Texture" id=4]
 [ext_resource path="res://start-assets/Parallax/buildings.png" type="Texture" id=5]
 [ext_resource path="res://start-assets/Parallax/bbg.png" type="Texture" id=6]
 [ext_resource path="res://start-assets/Parallax/far-buildings.png" type="Texture" id=7]
 [ext_resource path="res://src/UI/UserInterface.tscn" type="PackedScene" id=8]
 [ext_resource path="res://start-assets/Parallax/skill-foreground.png" type="Texture" id=9]
 [ext_resource path="res://src/Characters/Girl.tscn" type="PackedScene" id=10]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle1.png" type="Texture" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -425,16 +424,6 @@ layer = 128
 [node name="MessageLabel" parent="UserInteface/UserInterface" index="0"]
 visible = false
 
-[node name="BackgroundLayer" type="CanvasLayer" parent="."]
-layer = -100
-visible = false
-
-[node name="Background3" type="TextureRect" parent="BackgroundLayer"]
-margin_right = 640.0
-margin_bottom = 400.0
-texture = ExtResource( 4 )
-expand = true
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="BackBackground" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -502,8 +491,8 @@ tile_data = PoolIntArray( -1572855, 0, 0, -1572854, 0, 0, -1572730, 0, 0, -15727
 [node name="Girl" parent="." instance=ExtResource( 10 )]
 position = Vector2( 288, 279 )
 
-[node name="Player" parent="Girl" index="1"]
-texture = ExtResource( 11 )
+[node name="Legs" parent="Girl" index="4"]
+texture = ExtResource( 4 )
 
 [node name="Camera2D" parent="Girl" index="5"]
 limit_left = 0

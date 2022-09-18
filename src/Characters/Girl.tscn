@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=114 format=2]
 
 [ext_resource path="res://src/Characters/Girl.gd" type="Script" id=1]
 [ext_resource path="res://start-assets/Nera/sprites/legs/idle/leg_idle.png" type="Texture" id=2]
@@ -417,12 +417,13 @@ input_0/auto_advance = false
 input_1/name = "dead"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=62]
-
 [sub_resource type="AnimationNodeAnimation" id=43]
 animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=55]
+animation = "Crouch"
+
+[sub_resource type="AnimationNodeAnimation" id=71]
 animation = "Crouch"
 
 [sub_resource type="AnimationNodeAnimation" id=54]
@@ -437,6 +438,8 @@ animation = "CrouchShoot"
 
 [sub_resource type="AnimationNodeAnimation" id=69]
 animation = "CrouchShoot"
+
+[sub_resource type="AnimationNodeOneShot" id=72]
 
 [sub_resource type="AnimationNodeAnimation" id=52]
 animation = "CrouchStart"
@@ -516,25 +519,27 @@ input_1/name = "in_air"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=29]
-graph_offset = Vector2( -750.73, 17.0638 )
+graph_offset = Vector2( -1082.74, -23.4922 )
 nodes/Alive/node = SubResource( 66 )
 nodes/Alive/position = Vector2( 1093.33, 106.667 )
-nodes/Animation/node = SubResource( 62 )
-nodes/Animation/position = Vector2( -846.969, -91.0557 )
 nodes/Crouch/node = SubResource( 43 )
 nodes/Crouch/position = Vector2( -1146.67, 520 )
 nodes/Crouch2/node = SubResource( 55 )
-nodes/Crouch2/position = Vector2( -840, 260 )
+nodes/Crouch2/position = Vector2( -860, 80 )
+nodes/Crouch3/node = SubResource( 71 )
+nodes/Crouch3/position = Vector2( -860, 600 )
 nodes/CrouchEnd/node = SubResource( 54 )
 nodes/CrouchEnd/position = Vector2( -1146.67, 373.333 )
 nodes/CrouchEndPhase/node = SubResource( 56 )
 nodes/CrouchEndPhase/position = Vector2( -893.333, 413.333 )
 nodes/CrouchShooot/node = SubResource( 68 )
-nodes/CrouchShooot/position = Vector2( -560, 466.667 )
+nodes/CrouchShooot/position = Vector2( -900, 720 )
 nodes/CrouchShoot/node = SubResource( 69 )
 nodes/CrouchShoot/position = Vector2( 66.6667, 373.333 )
+nodes/CrouchShot/node = SubResource( 72 )
+nodes/CrouchShot/position = Vector2( -560, 500 )
 nodes/CrouchStart/node = SubResource( 52 )
-nodes/CrouchStart/position = Vector2( -840, 100 )
+nodes/CrouchStart/position = Vector2( -860, 240 )
 nodes/CrouchStartPhase/node = SubResource( 57 )
 nodes/CrouchStartPhase/position = Vector2( -580, 160 )
 nodes/CrouchTransition/node = SubResource( 58 )
@@ -570,7 +575,7 @@ nodes/death_animation/position = Vector2( 840, 333.333 )
 nodes/in_air/node = SubResource( 36 )
 nodes/in_air/position = Vector2( 260, -40 )
 nodes/output/position = Vector2( 1333.33, 93.3333 )
-node_connections = [ "output", 0, "Alive", "in_air", 0, "Movement", "in_air", 1, "Jump", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "Shoot", 0, "in_air", "Shoot", 1, "ShootPos", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "CrouchTransition", 2, "CrouchShooot", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "Alive", 0, "Hurt", "Alive", 1, "death_animation", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation", "ShootPos", 0, "RunShoot", "ShootPos", 1, "CrouchShoot" ]
+node_connections = [ "in_air", 0, "Movement", "in_air", 1, "Jump", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "CrouchTransition", 2, "CrouchShot", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "ShootPos", 0, "RunShoot", "ShootPos", 1, "CrouchShoot", "CrouchShot", 0, "Crouch3", "CrouchShot", 1, "CrouchShooot", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "Alive", 0, "Hurt", "Alive", 1, "death_animation", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "Shoot", 0, "in_air", "Shoot", 1, "ShootPos", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "output", 0, "Alive" ]
 
 [node name="Girl" type="KinematicBody2D"]
 collision_mask = 170
@@ -581,20 +586,17 @@ one_shot = true
 
 [node name="Player" type="Sprite" parent="."]
 position = Vector2( 10, -8 )
-texture = ExtResource( 38 )
 offset = Vector2( -10, 8 )
 
 [node name="CollisionPlayer" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PoolVector2Array( 5, -17.6, 7.8329, -15.9269, 10.705, -16.4491, 13.0548, -14.6214, 13.3159, -10.4439, 11, -7, 11, -3, 4, 1, 4, 6, 12, 25, 0, 26, -12, 25, -6, 7, -8.87728, -10.1828, -7.3107, -13.8381, -5, -17.6, -3.13316, -18.0157, 2.87206, -18.0157 )
+polygon = PoolVector2Array( 5, -17.6, 7.8329, -15.9269, 10.705, -16.4491, 13.0548, -14.6214, 13.3159, -10.4439, 11, -7, 11, -3, 4, 1, 4, 6, 16, 25, 0, 25, -17, 25, -6, 7, -8.87728, -10.1828, -7.3107, -13.8381, -5, -17.6, -3.13316, -18.0157, 2.87206, -18.0157 )
 
 [node name="CollisionPlayerCrouch" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PoolVector2Array( -1, -8, 1, -9, 5, -9, 7, -9, 8, -8, 12, -7, 17, -7, 15, 6, 7, 10, 15, 25, 0, 25, -16, 25, -11, 19, -5, 12, -4, 7, -5, 0, -4, -3 )
+polygon = PoolVector2Array( -4, -3, -2, -3, 3, -2, 8, -3, 12, -4, 16, -4, 16, 6, 13, 7, 8, 10, 16, 25, 0, 25, -17, 25, -7, 15, -4, 10, -4, 7, -5, 3, -5, -1 )
 disabled = true
 
 [node name="Legs" type="Sprite" parent="."]
-texture = ExtResource( 33 )
+texture = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -607,7 +609,6 @@ smoothing_speed = 10.0
 drag_margin_right = 0.0
 
 [node name="EnemyDetect" type="Area2D" parent="."]
-visible = false
 collision_mask = 130
 monitorable = false
 
@@ -640,6 +641,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Alive/current = 0
 parameters/CrouchEndPhase/active = false
+parameters/CrouchShot/active = false
 parameters/CrouchStartPhase/active = false
 parameters/CrouchTransition/current = 0
 parameters/Hurt/active = false
@@ -652,6 +654,33 @@ parameters/in_air/current = 0
 
 [node name="Gun" parent="." instance=ExtResource( 6 )]
 visible = false
+
+[node name="Debug" type="CanvasLayer" parent="."]
+
+[node name="Label1" type="Label" parent="Debug"]
+margin_left = 474.0
+margin_top = 313.0
+margin_right = 638.0
+margin_bottom = 327.0
+size_flags_horizontal = 3
+text = "Text"
+align = 2
+
+[node name="Label2" type="Label" parent="Debug"]
+margin_left = 503.0
+margin_top = 328.0
+margin_right = 638.0
+margin_bottom = 342.0
+text = "Text"
+align = 2
+
+[node name="Label3" type="Label" parent="Debug"]
+margin_left = 503.0
+margin_top = 345.0
+margin_right = 638.0
+margin_bottom = 359.0
+text = "Text"
+align = 2
 
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_EnemyDetect_area_entered"]
 [connection signal="body_entered" from="EnemyDetect" to="." method="_on_EnemyDetect_body_entered"]

@@ -43,6 +43,7 @@ func _ready() -> void:
 	$"/root/PlayerData".player_health = health
 	health = 10
 	animation_tree.active = true
+	$CollisionPlayerCrouch.disabled = true
 
 func _physics_process(delta: float) -> void:
 	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
@@ -57,7 +58,6 @@ func _physics_process(delta: float) -> void:
 		_velocity.y = -speed.y
 		jump_count += 1
 
-
 	if is_on_floor():
 		jump_count = 0
 
@@ -67,12 +67,25 @@ func _unhandled_input(event: InputEvent) -> void:
 		can_crouch = false
 		animation_tree.set("parameters/RunStartPhase/active", 1)
 		animation_tree.set("parameters/Movement/current", 1)
+		animation_tree.set("parameters/ShootPos/current", 0)
 	if event.is_action_released("move_right") or event.is_action_released("move_left") and !dead:
 		can_crouch = true
 		animation_tree.set("parameters/RunStopPhase/active", 1)
 		animation_tree.set("parameters/Movement/current", 0)
+	
+	if can_crouch:
+		if event.is_action_pressed("crouch") and !dead:
+			animation_tree.set("parameters/CrouchStartPhase/active", true)
+			animation_tree.set("parameters/CrouchTransition/current", 0)
+		if Input.is_action_just_released("crouch") and !dead:
+			animation_tree.set("parameters/CrouchTransition/current", 1)
+			animation_tree.set("parameters/CrouchEndPhase/active", 1)
+
 		
 func _process(delta: float) -> void:
+	$Debug/Label1.text = "Movement " + str(animation_tree.get("parameters/Movement/current"))
+	$Debug/Label2.text = "CrouchTransition " + str(animation_tree.get("parameters/CrouchTransition/current"))
+	$Debug/Label3.text = str(animation_tree.get("parameters/Movement/current"))
 	player_pos = $Player.get_global_position()
 	$"/root/PlayerData".player_pos = player_pos
 	var direction = get_direction()
@@ -81,23 +94,36 @@ func _process(delta: float) -> void:
 
 	if  animation_tree.get("parameters/Movement/current") == 2:
 		can_jump = false
+		$CollisionPlayer.disabled = true
+		$CollisionPlayer.visible = false
+		$CollisionPlayerCrouch.disabled = false
+		$CollisionPlayerCrouch.visible = true
+		$EnemyDetect/CollisionLegs2.disabled = true
+		$EnemyDetect/CollisionLegs2.visible = false
+		$EnemyDetect/CollisionLegsCrouch2.disabled = false
+		$EnemyDetect/CollisionLegsCrouch2.visible = true
 	elif animation_tree.get("parameters/Movement/current") == 0 or animation_tree.get("parameters/Movement/current") == 1:
 		can_jump = true
-
+		$CollisionPlayer.disabled = false
+		$CollisionPlayer.visible = true
+		$CollisionPlayerCrouch.disabled = true
+		$CollisionPlayerCrouch.visible = false
+		$EnemyDetect/CollisionLegs2.disabled = false
+		$EnemyDetect/CollisionLegs2.visible = true
+		$EnemyDetect/CollisionLegsCrouch2.disabled = true
+		$EnemyDetect/CollisionLegsCrouch2.visible = false
+		
 	if direction.x == 0:
 		animation_tree.set("parameters/Movement/current", 0)
-		
+
 	if can_crouch:
 		if Input.is_action_pressed("crouch") and !dead:
-			animation_tree.set("parameters/CrouchTransition/current", 0)
-			animation_tree.set("parameters/CrouchStartPhase/active", 1)
 			animation_tree.set("parameters/Movement/current", 2)
 			animation_tree.set("parameters/ShootPos/current", 1)
 		if Input.is_action_just_released("crouch") and !dead:
-			animation_tree.set("parameters/CrouchTransition/current", 1)
-			animation_tree.set("parameters/CrouchEndPhase/active", 1)
 			animation_tree.set("parameters/Movement/current", 2)
 			animation_tree.set("parameters/ShootPos/current", 0)
+			
 	if is_on_floor():
 		animation_tree.set("parameters/in_air/current", 0)
 	elif !is_on_floor():
@@ -107,12 +133,24 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("move_right"):
 		$Player.flip_h = false
 		$Legs.flip_h = false
+		$CollisionPlayer.scale = Vector2(1, 1)
+		$CollisionPlayerCrouch.scale = Vector2(1, 1)
+		$EnemyDetect/CollisionLegs2.scale = Vector2(1, 1)
+		$EnemyDetect/CollisionLegsCrouch2.scale = Vector2(1, 1)
 	if Input.is_action_pressed("move_left"):
 		$Player.flip_h = true
 		$Legs.flip_h = true
+		$CollisionPlayer.scale = Vector2(-1, 1)
+		$CollisionPlayerCrouch.scale = Vector2(-1, 1)
+		$EnemyDetect/CollisionLegs2.scale = Vector2(-1, 1)
+		$EnemyDetect/CollisionLegsCrouch2.scale = Vector2(-1, 1)
 
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_pressed("shoot") and can_jump:
 		animation_tree.set("parameters/Shoot/active", 1)
+	elif Input.is_action_pressed("shoot") and !can_jump:
+		animation_tree.set("parameters/CrouchTransition/current", 2)
+		animation_tree.set("parameters/CrouchShot/active", 1)
+		
 
 		
 	if Input.is_action_pressed("shoot") and can_fire:	#SHOOTING SYSTEM
