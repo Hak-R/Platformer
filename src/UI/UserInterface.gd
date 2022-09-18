@@ -18,7 +18,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	$HealthBar/Health.set_text(str($"/root/PlayerData".player_health))
 	$HealthBar.value = $"/root/PlayerData".player_health
-
+	
+	if $Settings/ScreenMode.selected == 0:
+		OS.window_fullscreen = true
+	elif $Settings/ScreenMode.selected == 1:
+		OS.window_fullscreen = false
+		
 
 func _on_Settings_button_up() -> void:
 	self.settings = not settings
