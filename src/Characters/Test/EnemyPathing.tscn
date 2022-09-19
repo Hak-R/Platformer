@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://start-assets/enemy.png" type="Texture" id=1]
+[ext_resource path="res://src/Characters/Test/EnemyPathing.gd" type="Script" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 131, 126, 0, 0, 0, 0, 413, 124, 0, 0, 0, 0, 132, 126 )
+}
+
+[node name="EnemyPathing" type="Path2D"]
+curve = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2( 131, 126 )
+rotation = -0.00709358
+rotate = false
+
+[node name="Sprite" type="Sprite" parent="PathFollow2D"]
+texture = ExtResource( 1 )

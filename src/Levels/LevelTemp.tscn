@@ -421,9 +421,6 @@ layer = 128
 
 [node name="UserInterface" parent="UserInteface" instance=ExtResource( 8 )]
 
-[node name="MessageLabel" parent="UserInteface/UserInterface" index="0"]
-visible = false
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="BackBackground" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -505,7 +502,5 @@ position = Vector2( 1104, 249 )
 [node name="Ghoul" parent="." instance=ExtResource( 10 )]
 position = Vector2( 536, 352 )
 
-[editable path="UserInteface/UserInterface"]
-[editable path="UserInteface/UserInterface/PauseOverlay/MobileControl"]
 [editable path="Girl"]
 [editable path="Girl/Gun"]

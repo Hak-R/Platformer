@@ -75,9 +75,9 @@ func _process(delta: float) -> void:
 	
 func score_popup():
 	var floaty_texty = floating_text2.instance()
-#	floaty_texty.position = Vector2(0, -100)
-#	floaty_texty.velocity = Vector2(rand_range(-50, 50), -100)
-#	floaty_texty.modulate = Color(rand_range(0.7, 1), rand_range(0.7, 1),  rand_range(0.7, 1), 1.0)
+	floaty_texty.position = Vector2(0, -100)
+	floaty_texty.velocity = Vector2(rand_range(-50, 50), -100)
+	floaty_texty.modulate = Color(rand_range(0.7, 1), rand_range(0.7, 1),  rand_range(0.7, 1), 1.0)
 	
 	floaty_texty.text = damage_done
 	add_child(floaty_texty)
