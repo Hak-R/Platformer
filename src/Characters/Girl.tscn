@@ -519,7 +519,7 @@ input_1/name = "in_air"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=29]
-graph_offset = Vector2( -423.513, -67.4602 )
+graph_offset = Vector2( -0.00012207, -4.06901e-05 )
 nodes/Alive/node = SubResource( 66 )
 nodes/Alive/position = Vector2( 1093.33, 106.667 )
 nodes/Crouch/node = SubResource( 43 )
@@ -575,7 +575,7 @@ nodes/death_animation/position = Vector2( 840, 333.333 )
 nodes/in_air/node = SubResource( 36 )
 nodes/in_air/position = Vector2( 260, -40 )
 nodes/output/position = Vector2( 1333.33, 93.3333 )
-node_connections = [ "in_air", 0, "Movement", "in_air", 1, "Jump", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "Alive", 0, "Hurt", "Alive", 1, "death_animation", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "ShootPos", 0, "RunShoot", "ShootPos", 1, "CrouchShoot", "CrouchShot", 0, "Crouch3", "CrouchShot", 1, "CrouchShooot", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "CrouchTransition", 2, "CrouchShot", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "Shoot", 0, "in_air", "Shoot", 1, "ShootPos", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "output", 0, "Alive" ]
+node_connections = [ "output", 0, "Alive", "Shoot", 0, "in_air", "Shoot", 1, "ShootPos", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "CrouchTransition", 2, "CrouchShot", "CrouchShot", 0, "Crouch3", "CrouchShot", 1, "CrouchShooot", "Alive", 0, "Hurt", "Alive", 1, "death_animation", "ShootPos", 0, "RunShoot", "ShootPos", 1, "CrouchShoot", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "in_air", 0, "Movement", "in_air", 1, "Jump", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation" ]
 
 [node name="Girl" type="KinematicBody2D"]
 collision_mask = 170
@@ -586,6 +586,7 @@ one_shot = true
 
 [node name="Player" type="Sprite" parent="."]
 position = Vector2( 10, -8 )
+texture = ExtResource( 5 )
 offset = Vector2( -10, 8 )
 
 [node name="CollisionPlayer" type="CollisionPolygon2D" parent="."]
@@ -598,7 +599,7 @@ polygon = PoolVector2Array( -4, -3, -2, -7, 4, -9, 9, -7, 12, -4, 16, -4, 16, 6,
 disabled = true
 
 [node name="Legs" type="Sprite" parent="."]
-texture = ExtResource( 52 )
+texture = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -648,7 +649,7 @@ parameters/CrouchShot/active = false
 parameters/CrouchStartPhase/active = false
 parameters/CrouchTransition/current = 0
 parameters/Hurt/active = false
-parameters/Movement/current = 2
+parameters/Movement/current = 0
 parameters/RunStartPhase/active = false
 parameters/RunStopPhase/active = false
 parameters/Shoot/active = false

@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://src/Characters/Ghoul.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "GhoulW",
+"language": "GDScript",
+"path": "res://src/Characters/Test/GhoulW.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "NoteEnemy",
 "language": "GDScript",
 "path": "res://src/Characters/NoteEnemy.gd"
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "Actor": "",
 "BlobEnemy": "",
 "Ghoul": "",
+"GhoulW": "",
 "NoteEnemy": ""
 }
 

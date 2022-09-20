@@ -1,5 +1,5 @@
 extends "res://src/Characters/Actor.gd"
-class_name Ghoul
+class_name GhoulW
 
 onready var playerr_pos = Vector2.ZERO
 onready var health_bar = $ghoul/HealthBar
@@ -18,7 +18,6 @@ var can_fire = true
 var damage_done = 0
 
 func _ready() -> void:
-	print(is_instance_valid(self))
 	set_physics_process(false)
 	_velocity.x = -speed.x
 	
@@ -50,39 +49,21 @@ func _process(delta: float) -> void:
 	playerr_pos = $"/root/PlayerData".player_pos
 		
 	if playerr_pos.x < global_position.x:
-		$ghoul.flip_h = true
 		$CollisionPolygon2D.scale.x = 1.0
 		$Stomp.scale.x = 1.0
 	elif playerr_pos.x > global_position.x:
-		$ghoul.flip_h = false
 		$CollisionPolygon2D.scale.x = -1.0
 		$Stomp.scale.x = -1.0
-		
-	if $ShootTimer.time_left == 0:
-		$ShootTimer.start(1.5)
-		var bullet_shoot = bullet_object.instance()
-		bullet_shoot.position = $ghoul.get_position()
-		if playerr_pos.x < global_position.x:
-			bullet_shoot.apply_impulse(Vector2(),Vector2(-bullet_speed, 0))
-		elif playerr_pos.x > global_position.x:
-			bullet_shoot.apply_impulse(Vector2(),Vector2(bullet_speed, 0))
-		bullet_shoot.get_node("AnimationPlayer").play("ShootBullet")
-		add_child(bullet_shoot)
-		can_fire = false
-		yield(get_tree().create_timer(fire_rate), "timeout")
-		bullet_shoot.queue_free()
-		can_fire = true
-		
 	
 func score_popup():
-	if health != 0:
-		var floaty_texty = floating_text2.instance()
-		floaty_texty.position = Vector2(0, -100)
-		floaty_texty.velocity = Vector2(rand_range(-50, 50), -100)
-		floaty_texty.modulate = Color(rand_range(0.7, 1), rand_range(0.7, 1),  rand_range(0.7, 1), 1.0)
-		floaty_texty.text = damage_done
-		add_child(floaty_texty)
+	var floaty_texty = floating_text2.instance()
+	floaty_texty.position = Vector2(0, -100)
+	floaty_texty.velocity = Vector2(rand_range(-50, 50), -100)
+	floaty_texty.modulate = Color(rand_range(0.7, 1), rand_range(0.7, 1),  rand_range(0.7, 1), 1.0)
+	
+	floaty_texty.text = damage_done
+	add_child(floaty_texty)
 	
 func destroy():
 	queue_free()
-	
+
