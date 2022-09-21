@@ -20,6 +20,7 @@ script = ExtResource( 2 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Message" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.568627 )
 show_behind_parent = true
 position = Vector2( 152, 16 )
 scale = Vector2( 0.266667, 0.444444 )
