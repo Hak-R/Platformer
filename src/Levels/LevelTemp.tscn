@@ -11,7 +11,7 @@
 [ext_resource path="res://src/Characters/NoteEnemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Characters/Ghoul.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Characters/Test/GhoulWalking.tscn" type="PackedScene" id=11]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle0.png" type="Texture" id=12]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle1.png" type="Texture" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
