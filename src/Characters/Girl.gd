@@ -29,8 +29,6 @@ var lever_active = false
 func _on_EnemyDetect_area_entered(area: Area2D) -> void:
 	if "Lever" in area.name:
 		lever_active = true
-		if Input.is_action_pressed("activate"):
-			area.activate()
 	if "Bouncer" in area.name:
 		_velocity = calculate_stomp_velocity(_velocity, stomp_impulse) * 1.5
 	elif "Sign" in area.name:
@@ -69,6 +67,9 @@ func _physics_process(delta: float) -> void:
 		jump_count = 0
 
 func _unhandled_input(event: InputEvent) -> void:
+	
+	if event.is_action_pressed("activate") and lever_active:
+		get_tree().call_group("Lever", "activate")
 	
 	if event.is_action_pressed("move_right") or event.is_action_pressed("move_left") and !dead:
 		can_crouch = false

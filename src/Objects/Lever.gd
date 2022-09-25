@@ -1,10 +1,18 @@
+tool
 extends Area2D
 
+export(NodePath) var gate_path
+
+onready var node = get_node(gate_path)
 onready var active = false
+
+func _get_configuration_warning():
+	var warning = "Gate Path must be assigned a gate!"
+	if gate_path == "":
+		return warning
 
 func _on_body_entered(body):
 	if "Girl" in body.name:
-		active = true
 		$PressLabel.visible = true
 		$AnimationPlayer.play("Bounce")
 	else:
@@ -13,7 +21,6 @@ func _on_body_entered(body):
 
 func _on_body_exited(body):
 	if "Girl" in body.name:
-		active = false
 		$PressLabel.visible = false
 		$AnimationPlayer.stop(true)
 
@@ -24,4 +31,8 @@ func _process(delta):
 		$Sprite.flip_h = false
 		
 func activate():
-	print("yes")
+	get_tree().call_group("Gate", "gate_activation")
+	if !active:
+		active = true
+	elif active:
+		active = false
