@@ -115,6 +115,11 @@ crouch={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+activate={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -126,6 +131,7 @@ crouch={
 2d_physics/layer_6="sign"
 2d_physics/layer_7="bullet_friendly"
 2d_physics/layer_8="bullet_enemy"
+2d_physics/layer_9="lever"
 
 [physics]
 

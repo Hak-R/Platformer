@@ -24,14 +24,21 @@ var can_crouch = true
 var can_jump = true
 var dead = false
 var bullet_collision = false
+var lever_active = false
 
 func _on_EnemyDetect_area_entered(area: Area2D) -> void:
+	if "Lever" in area.name:
+		lever_active = true
+		if Input.is_action_pressed("activate"):
+			area.activate()
 	if "Bouncer" in area.name:
 		_velocity = calculate_stomp_velocity(_velocity, stomp_impulse) * 1.5
 	elif "Sign" in area.name:
-		_velocity = Vector2(0, 0)	
-	else:
-		_velocity = calculate_stomp_velocity(_velocity, stomp_impulse)
+		_velocity = Vector2(0, 0)
+		
+func _on_area_exited(area):
+	if "Lever" in area.name:
+		lever_active = false
 
 func _on_EnemyDetect_body_entered(body: Node) -> void:
 	animation_tree.set("parameters/Hurt/active", 1)

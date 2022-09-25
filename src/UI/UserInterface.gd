@@ -14,7 +14,6 @@ func _ready() -> void:
 	PlayerData.connect("score_updated", self, "update_interface")
 	PlayerData.connect("player_died", self, "_on_PlayerData_player_died")
 	update_interface()
-	print($Settings/ScreenMode.selected)
 	
 func _process(delta: float) -> void:
 	$HealthBar/Health.set_text(str($"/root/PlayerData".player_health))

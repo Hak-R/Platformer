@@ -18,7 +18,6 @@ var can_fire = true
 var damage_done = 0
 
 func _ready() -> void:
-	print(is_instance_valid(self))
 	set_physics_process(false)
 	_velocity.x = -speed.x
 	

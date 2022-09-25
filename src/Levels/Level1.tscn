@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://start-assets/TileSet/tileset.png" type="Texture" id=1]
 [ext_resource path="res://start-assets/Parallax/skill-foreground.png" type="Texture" id=2]
@@ -8,10 +8,8 @@
 [ext_resource path="res://start-assets/Parallax/bbg.png" type="Texture" id=6]
 [ext_resource path="res://src/Characters/Girl.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/UserInterface.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/Characters/NoteEnemy.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/Characters/Ghoul.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Objects/Lever.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Characters/Test/GhoulWalking.tscn" type="PackedScene" id=11]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle0.png" type="Texture" id=12]
 [ext_resource path="res://src/Objects/Sign.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
@@ -518,9 +516,6 @@ tile_data = PoolIntArray( 131081, -1610612736, 393220, 196617, -1610612736, 3932
 [node name="Girl" parent="." instance=ExtResource( 7 )]
 position = Vector2( 191, 327 )
 
-[node name="Player" parent="Girl" index="1"]
-texture = ExtResource( 12 )
-
 [node name="Camera2D" parent="Girl" index="5"]
 limit_left = 0
 limit_bottom = 400
@@ -529,14 +524,10 @@ smoothing_speed = 20.0
 [node name="AnimationTree" parent="Girl" index="8"]
 parameters/ShootPos/current = 0
 
-[node name="NoteEnemy" parent="." instance=ExtResource( 9 )]
-position = Vector2( 34, 117 )
+[node name="GhoulWalk" type="Node" parent="."]
 
-[node name="Ghoul" parent="." instance=ExtResource( 10 )]
-position = Vector2( 31, 232 )
-
-[node name="EnemyPathing" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1433, 288 )
+[node name="EnemyPathing" parent="GhoulWalk" instance=ExtResource( 11 )]
+position = Vector2( 1289, 288 )
 scale = Vector2( 0.3, 0.3 )
 
 [node name="MoveSign" parent="." instance=ExtResource( 13 )]
@@ -554,7 +545,10 @@ message_text = "Press Spacebar or W twice to double-jump"
 
 [node name="ShootSign" parent="." instance=ExtResource( 13 )]
 position = Vector2( 1328, 335 )
-message_text = "Shoot: Enter or Left Mouse a"
+message_text = "Shoot: PRESS ENTER OR LEFT CLICK TO SHOOT"
+
+[node name="Lever" parent="." instance=ExtResource( 9 )]
+position = Vector2( 361, 344 )
 
 [editable path="Girl"]
 [editable path="Girl/Gun"]

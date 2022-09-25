@@ -10,8 +10,8 @@
 [ext_resource path="res://src/UI/UserInterface.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Characters/NoteEnemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Characters/Ghoul.tscn" type="PackedScene" id=10]
-[ext_resource path="res://src/Characters/Test/GhoulWalking.tscn" type="PackedScene" id=11]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle1.png" type="Texture" id=12]
+[ext_resource path="res://src/Objects/Lever.tscn" type="PackedScene" id=11]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle3.png" type="Texture" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -507,9 +507,8 @@ position = Vector2( 1104, 249 )
 [node name="Ghoul" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1354, 347 )
 
-[node name="EnemyPathing" parent="." instance=ExtResource( 11 )]
-position = Vector2( 444.001, 287 )
-scale = Vector2( 0.3, 0.3 )
+[node name="Lever" parent="." instance=ExtResource( 11 )]
+position = Vector2( 391, 343 )
 
 [editable path="Girl"]
 [editable path="Girl/Gun"]

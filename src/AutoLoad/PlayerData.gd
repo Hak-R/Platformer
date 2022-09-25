@@ -9,6 +9,7 @@ var text_box = ""
 var player_pos: = Vector2.ZERO
 var player_health = 10
 var max_player_health = 10
+var ghoul_health = 100
 
 
 func reset() -> void:

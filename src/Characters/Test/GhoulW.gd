@@ -4,6 +4,8 @@ class_name GhoulW
 onready var playerr_pos = Vector2.ZERO
 onready var health_bar = $ghoul/HealthBar
 onready var health_text = $ghoul/HealthBar/Health
+onready var animation_ghoul = get_parent().get_parent().get_node("AnimationPlayer")
+
 
 export var score: = 100
 export var bullet_speed = 1000
@@ -25,9 +27,10 @@ func _ready() -> void:
 
 	
 func _on_Stomp_body_entered(body: Node) -> void:
-	score_popup()
-	PlayerData.score += score
-	health -= damage_done
+	if health > 0:
+		score_popup()
+		PlayerData.score += score
+		health -= damage_done
 	if health <= 0:
 		destroy()
 	else:
@@ -41,8 +44,18 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	health_bar.value = health
 	health_text.set_text(str(health))
-	if health < health / 2:
-		health_bar.tint_progress = Color(0.984314, 0, 0)
+	if health <= $ghoul/HealthBar.max_value / 2:
+		$ghoul/HealthBar/Tween.interpolate_property(
+			$ghoul/HealthBar,
+			"tint_progress",
+			Color(0.984314, 0, 0, 1),
+			Color(0.129412, 0.784314, 0.035294, 1),
+			3,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN
+			)
+		$ghoul/HealthBar/Tween.start()
+#		health_bar.tint_progress = Color(0.984314, 0, 0)
 	damage_done = damage[randi() % 2]
 	
 	
@@ -65,5 +78,10 @@ func score_popup():
 	add_child(floaty_texty)
 	
 func destroy():
-	queue_free()
-
+	collision_layer = 0b00
+	collision_mask = 0b0000000
+	$Stomp.collision_layer = 0b00
+	$Stomp.collision_mask = 0b0000000
+	animation_ghoul.play("Death")
+	yield(get_tree().create_timer(1.0), "timeout")
+	$ghoul.visible = false
