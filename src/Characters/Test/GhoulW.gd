@@ -3,7 +3,6 @@ class_name GhoulW
 
 onready var playerr_pos = Vector2.ZERO
 onready var health_bar = $ghoul/HealthBar
-onready var health_text = $ghoul/HealthBar/Health
 onready var animation_ghoul = get_parent().get_parent().get_node("AnimationPlayer")
 
 
@@ -18,12 +17,14 @@ var bullet_object = preload("res://src/Objects/BulletEnemy.tscn")
 var floating_text2 = preload("res://src/UI/FloatingText2.tscn")
 var can_fire = true
 var damage_done = 0
+var new_max_health = 0
 
 func _ready() -> void:
 	set_physics_process(false)
 	_velocity.x = -speed.x
-	
 	health_bar.max_value = health
+	new_max_health = health	
+	health_bar.visible = false
 
 	
 func _on_Stomp_body_entered(body: Node) -> void:
@@ -43,7 +44,12 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	health_bar.value = health
-	health_text.set_text(str(health))
+	
+	if health != new_max_health:
+		$ghoul/HealthBar/Tween.interpolate_property($ghoul/HealthBar, "visible", true, false, 3, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
+		$ghoul/HealthBar/Tween.start()
+		new_max_health = health
+	
 	if health <= $ghoul/HealthBar.max_value / 2:
 		$ghoul/HealthBar/Tween.interpolate_property(
 			$ghoul/HealthBar,
@@ -55,7 +61,6 @@ func _process(delta: float) -> void:
 			Tween.EASE_IN
 			)
 		$ghoul/HealthBar/Tween.start()
-#		health_bar.tint_progress = Color(0.984314, 0, 0)
 	damage_done = damage[randi() % 2]
 	
 	
@@ -70,7 +75,7 @@ func _process(delta: float) -> void:
 	
 func score_popup():
 	var floaty_texty = floating_text2.instance()
-	floaty_texty.position = Vector2(0, -100)
+	floaty_texty.position = Vector2(-200, -100)
 	floaty_texty.velocity = Vector2(rand_range(-50, 50), -100)
 	floaty_texty.modulate = Color(rand_range(0.7, 1), rand_range(0.7, 1),  rand_range(0.7, 1), 1.0)
 	
