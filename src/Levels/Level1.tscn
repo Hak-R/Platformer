@@ -8,7 +8,7 @@
 [ext_resource path="res://start-assets/Parallax/bbg.png" type="Texture" id=6]
 [ext_resource path="res://src/Characters/Girl.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/UserInterface.tscn" type="PackedScene" id=8]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle2.png" type="Texture" id=9]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle0.png" type="Texture" id=9]
 [ext_resource path="res://src/Objects/Gate.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Characters/Test/GhoulWalking.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Objects/Lever.tscn" type="PackedScene" id=12]
@@ -535,29 +535,32 @@ parameters/ShootPos/current = 0
 position = Vector2( 1289, 288 )
 scale = Vector2( 0.3, 0.3 )
 
-[node name="MoveSign" parent="." instance=ExtResource( 13 )]
-position = Vector2( 282, 335 )
+[node name="Signs" type="Node" parent="."]
+
+[node name="MoveSign" parent="Signs" instance=ExtResource( 13 )]
+position = Vector2( 138, 335 )
 message_text = "Move Left: <- or A
 Move Right: -> or D"
 
-[node name="JumpSign" parent="." instance=ExtResource( 13 )]
-position = Vector2( 596, 335 )
+[node name="JumpSign" parent="Signs" instance=ExtResource( 13 )]
+position = Vector2( 452, 335 )
 message_text = "Jump: Spacebar or W"
 
-[node name="DoubleJumpSign" parent="." instance=ExtResource( 13 )]
-position = Vector2( 1051, 336 )
+[node name="DoubleJumpSign" parent="Signs" instance=ExtResource( 13 )]
+position = Vector2( 907, 336 )
 message_text = "Press Spacebar or W twice to double-jump"
 
-[node name="ShootSign" parent="." instance=ExtResource( 13 )]
-position = Vector2( 1328, 335 )
+[node name="ShootSign" parent="Signs" instance=ExtResource( 13 )]
+position = Vector2( 1184, 335 )
 message_text = "Shoot: PRESS ENTER OR LEFT CLICK TO SHOOT"
 
 [node name="Gate" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1887, 296 )
+door_switch_id = 1
 
 [node name="Lever" parent="." instance=ExtResource( 12 )]
 position = Vector2( 1781, 344 )
-gate_path = NodePath("../Gate")
+switch_id = 1
 
 [editable path="Girl"]
 [editable path="Girl/Gun"]

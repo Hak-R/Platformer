@@ -29,10 +29,17 @@ position = Vector2( 26, 33 )
 collision_layer = 256
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="SwitchSprite_OFF" type="Sprite" parent="."]
 position = Vector2( 3.5, -3.5 )
 scale = Vector2( 0.0112305, 0.0112305 )
 texture = ExtResource( 1 )
+
+[node name="SwitchSprite_ON" type="Sprite" parent="."]
+visible = false
+position = Vector2( 3.5, -3.5 )
+scale = Vector2( 0.0112305, 0.0112305 )
+texture = ExtResource( 1 )
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 3, -4.75 )

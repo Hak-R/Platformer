@@ -1,38 +1,42 @@
-tool
+class_name Lever
 extends Area2D
+ 
+signal switch_toggled(switch_id)
+ 
+export var switch_id: int = 0 setget , get_switch_id
+ 
+var _state: bool = false
+ 
+onready var sprite_off: Sprite = $SwitchSprite_OFF
+onready var sprite_on: Sprite = $SwitchSprite_ON
+ 
+func get_switch_id() -> int:
+	return switch_id
 
-export(NodePath) var gate_path
-
-onready var node = get_node(gate_path)
-onready var active = false
-
-func _get_configuration_warning():
-	var warning = "Gate Path must be assigned a gate!"
-	if gate_path == "":
-		return warning
+func _ready() -> void:
+	sprite_off.visible = true
+	sprite_on.visible = false
+	_state = false
 
 func _on_body_entered(body):
-	if "Girl" in body.name:
+	if body.name == "Girl":
 		$PressLabel.visible = true
 		$AnimationPlayer.play("Bounce")
-	else:
-		$PressLabel.visible = false
 		
-
 func _on_body_exited(body):
-	if "Girl" in body.name:
+	if body.name == "Girl":
 		$PressLabel.visible = false
 		$AnimationPlayer.stop(true)
+	
+func gate_activation():
+	if _state == false:
+		sprite_off.visible = false
+		sprite_on.visible = true
+		_state = true
+		emit_signal("switch_toggled", switch_id)
+	elif _state == true:
+		sprite_off.visible = true
+		sprite_on.visible = false
+		_state = false
+		emit_signal("switch_toggled", switch_id)
 
-func _process(delta):
-	if active:
-		$Sprite.flip_h = true
-	if !active:
-		$Sprite.flip_h = false
-		
-func activate():
-	get_tree().call_group("Gate", "gate_activation")
-	if !active:
-		active = true
-	elif active:
-		active = false

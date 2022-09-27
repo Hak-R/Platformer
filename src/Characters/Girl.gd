@@ -69,7 +69,7 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("activate") and lever_active:
-		get_tree().call_group("Lever", "activate")
+		get_tree().call_group("Lever", "gate_activation")
 	
 	if event.is_action_pressed("move_right") or event.is_action_pressed("move_left") and !dead:
 		can_crouch = false

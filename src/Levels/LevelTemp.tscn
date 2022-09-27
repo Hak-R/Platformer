@@ -11,8 +11,8 @@
 [ext_resource path="res://src/Characters/NoteEnemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Characters/Ghoul.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Objects/Lever.tscn" type="PackedScene" id=11]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle0.png" type="Texture" id=12]
 [ext_resource path="res://src/Objects/Gate.tscn" type="PackedScene" id=13]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle0.png" type="Texture" id=14]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -416,7 +416,7 @@ points = PoolVector2Array( 16, 0, 16, 16, 0, 16, 0, 8.48816, 10.5848, 8.58162, 1
 } ]
 0/z_index = 0
 
-[node name="LevelTemp" type="Node2D"]
+[node name="LevelTemp" type="Node2D" groups=["Level"]]
 position = Vector2( -144, 0 )
 
 [node name="UserInteface" type="CanvasLayer" parent="."]
@@ -492,7 +492,7 @@ tile_data = PoolIntArray( -1572855, 0, 0, -1572854, 0, 0, -1572730, 0, 0, -15727
 position = Vector2( 284, 325 )
 
 [node name="Player" parent="Girl" index="1"]
-texture = ExtResource( 12 )
+texture = ExtResource( 14 )
 
 [node name="Camera2D" parent="Girl" index="5"]
 limit_left = 0
@@ -509,11 +509,12 @@ position = Vector2( 1104, 249 )
 position = Vector2( 1354, 347 )
 
 [node name="Lever" parent="." instance=ExtResource( 11 )]
-position = Vector2( 391, 343 )
-gate_path = NodePath("../Gate")
+position = Vector2( 387, 344 )
+switch_id = 1
 
 [node name="Gate" parent="." instance=ExtResource( 13 )]
-position = Vector2( 502, 296 )
+position = Vector2( 528, 296 )
+door_switch_id = 1
 
 [editable path="Girl"]
 [editable path="Girl/Gun"]
