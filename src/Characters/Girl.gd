@@ -39,8 +39,9 @@ func _on_area_exited(area):
 		lever_active = false
 
 func _on_EnemyDetect_body_entered(body: Node) -> void:
-	animation_tree.set("parameters/Hurt/active", 1)
-	damage()
+	if not "Platform" in body.name:
+		animation_tree.set("parameters/Hurt/active", 1)
+		damage()
 
 func _ready() -> void:
 	dead = false
@@ -98,7 +99,7 @@ func _process(delta: float) -> void:
 	$"/root/PlayerData".player_pos = player_pos
 	var direction = get_direction()
 	if global_position.y > cam_limit.limit_bottom:
-		die()
+		die_fall()
 
 	if  animation_tree.get("parameters/Movement/current") == 2:
 		can_jump = false
@@ -224,6 +225,17 @@ func die() -> void:
 	animation_tree.set("parameters/Alive/current", 1)
 	yield(get_tree().create_timer(3), "timeout")
 	queue_free()
+
+func die_fall() -> void:
+	collision_layer = 0b100
+	collision_mask = 0b00000000
+	$EnemyDetect.collision_layer = 0b100
+	$EnemyDetect.collision_mask = 0b00000000
+	dead = true 
+	PlayerData.death += 1
+	yield(get_tree().create_timer(1.5), "timeout")
+	queue_free()
+
 
 func damage() -> void:
 	if health > 0:

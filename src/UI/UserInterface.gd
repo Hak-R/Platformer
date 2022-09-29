@@ -29,7 +29,7 @@ func _on_Settings_button_up() -> void:
 	self.settings = not settings
 		
 func _on_PlayerData_player_died() -> void:
-	yield(get_tree().create_timer(3), "timeout")
+	yield(get_tree().create_timer(1.5), "timeout")
 	self.paused = true
 	pause_title.text = ":("
 

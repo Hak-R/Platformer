@@ -28,14 +28,15 @@ func _ready() -> void:
 
 	
 func _on_Stomp_body_entered(body: Node) -> void:
-	if health > 0:
-		score_popup()
-		PlayerData.score += score
-		health -= damage_done
-	if health <= 0:
-		destroy()
-	else:
-		return
+	if not "Girl" in body.name:
+		if health > 0:
+			score_popup()
+			PlayerData.score += score
+			health -= damage_done
+		if health <= 0:
+			destroy()
+		else:
+			return
 	
 func _physics_process(delta: float) -> void:
 	_velocity.y += gravity * delta
