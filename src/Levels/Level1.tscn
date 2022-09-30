@@ -8,7 +8,7 @@
 [ext_resource path="res://start-assets/Parallax/bbg.png" type="Texture" id=6]
 [ext_resource path="res://src/Characters/Girl.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/UserInterface.tscn" type="PackedScene" id=8]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle1.png" type="Texture" id=9]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle2.png" type="Texture" id=9]
 [ext_resource path="res://src/Objects/Gate.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Characters/Test/GhoulWalking.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Objects/Lever.tscn" type="PackedScene" id=12]
@@ -573,6 +573,9 @@ switch_id = 1
 
 [node name="PlatformPath" parent="." instance=ExtResource( 14 )]
 position = Vector2( 2701, 126 )
+
+[node name="PathFollow2D" parent="PlatformPath" index="0"]
+position = Vector2( 325.8, 142.91 )
 
 [editable path="Girl"]
 [editable path="Girl/Gun"]

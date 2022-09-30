@@ -67,7 +67,6 @@ func _process(delta: float) -> void:
 		add_child(bullet_shoot)
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
-		bullet_shoot.queue_free()
 		can_fire = true
 		
 	

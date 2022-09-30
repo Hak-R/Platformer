@@ -144,6 +144,7 @@ activate={
 2d_physics/layer_7="bullet_friendly"
 2d_physics/layer_8="bullet_enemy"
 2d_physics/layer_9="lever"
+2d_physics/layer_10="items"
 
 [physics]
 

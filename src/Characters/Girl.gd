@@ -1,5 +1,7 @@
 extends Actor 
 
+signal in_bullet
+
 onready var animation_tree = $AnimationTree
 onready var animation_mode = animation_tree.get("parameters/playback")
 
@@ -42,8 +44,11 @@ func _on_EnemyDetect_body_entered(body: Node) -> void:
 	if not "Platform" in body.name:
 		animation_tree.set("parameters/Hurt/active", 1)
 		damage()
+	if "Bullet" in body.name:
+		emit_signal("in_bullet")
+	
 
-func _ready() -> void:
+func _ready() -> void:	
 	dead = false
 	animation_tree.set("parameters/Alive/current", 0)
 	$"/root/PlayerData".player_health = health
@@ -92,6 +97,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		
 func _process(delta: float) -> void:
+	
 	$Debug/Label1.text = "Movement " + str(animation_tree.get("parameters/Movement/current"))
 	$Debug/Label2.text = "CrouchTransition " + str(animation_tree.get("parameters/CrouchTransition/current"))
 	$Debug/Label3.text = str(animation_tree.get("parameters/Movement/current"))
@@ -243,3 +249,6 @@ func damage() -> void:
 	$"/root/PlayerData".player_health = health
 	if health == 0:
 		die()
+
+func testy():
+	print("Test works")
