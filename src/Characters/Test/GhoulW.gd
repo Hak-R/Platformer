@@ -79,7 +79,6 @@ func score_popup():
 	floaty_texty.position = Vector2(-200, -100)
 	floaty_texty.velocity = Vector2(rand_range(-50, 50), -100)
 	floaty_texty.modulate = Color(rand_range(0.7, 1), rand_range(0.7, 1),  rand_range(0.7, 1), 1.0)
-	
 	floaty_texty.text = damage_done
 	add_child(floaty_texty)
 	

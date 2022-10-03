@@ -575,7 +575,7 @@ nodes/death_animation/position = Vector2( 840, 333.333 )
 nodes/in_air/node = SubResource( 36 )
 nodes/in_air/position = Vector2( 260, -40 )
 nodes/output/position = Vector2( 1333.33, 93.3333 )
-node_connections = [ "in_air", 0, "Movement", "in_air", 1, "Jump", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "CrouchTransition", 2, "CrouchShot", "ShootPos", 0, "RunShoot", "ShootPos", 1, "CrouchShoot", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "Shoot", 0, "in_air", "Shoot", 1, "ShootPos", "CrouchShot", 0, "Crouch3", "CrouchShot", 1, "CrouchShooot", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "Alive", 0, "Hurt", "Alive", 1, "death_animation", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation", "output", 0, "Alive" ]
+node_connections = [ "output", 0, "Alive", "in_air", 0, "Movement", "in_air", 1, "Jump", "Hurt", 0, "Shoot", "Hurt", 1, "HurtAnimation", "Alive", 0, "Hurt", "Alive", 1, "death_animation", "Movement", 0, "RunStopPhase", "Movement", 1, "RunStartPhase", "Movement", 2, "CrouchTransition", "CrouchEndPhase", 0, "CrouchEnd", "CrouchEndPhase", 1, "Crouch", "CrouchShot", 0, "Crouch3", "CrouchShot", 1, "CrouchShooot", "RunStartPhase", 0, "Run", "RunStartPhase", 1, "RunStart", "CrouchTransition", 0, "CrouchStartPhase", "CrouchTransition", 1, "CrouchEndPhase", "CrouchTransition", 2, "CrouchShot", "CrouchStartPhase", 0, "CrouchStart", "CrouchStartPhase", 1, "Crouch2", "Shoot", 0, "in_air", "Shoot", 1, "ShootPos", "ShootPos", 0, "RunShoot", "ShootPos", 1, "CrouchShoot", "RunStopPhase", 0, "Idle", "RunStopPhase", 1, "RunStop" ]
 
 [node name="Girl" type="KinematicBody2D" groups=["Girl"]]
 collision_mask = 938
@@ -586,7 +586,7 @@ one_shot = true
 
 [node name="Player" type="Sprite" parent="."]
 position = Vector2( 10, -8 )
-texture = ExtResource( 16 )
+texture = ExtResource( 4 )
 offset = Vector2( -10, 8 )
 
 [node name="CollisionPlayer" type="CollisionPolygon2D" parent="."]

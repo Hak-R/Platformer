@@ -105,10 +105,10 @@ margin_left = -87.0
 margin_top = 60.5
 margin_right = 87.0
 margin_bottom = 83.5
-text = "Windowed"
+text = "Full Screen"
 flat = true
 items = [ "Full Screen", null, false, 0, null, "Windowed", null, false, 1, null ]
-selected = 1
+selected = 0
 
 [node name="SettingsTitle" parent="Settings" instance=ExtResource( 3 )]
 anchor_left = 0.0

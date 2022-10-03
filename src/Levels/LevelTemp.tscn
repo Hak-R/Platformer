@@ -11,7 +11,7 @@
 [ext_resource path="res://src/Characters/NoteEnemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Characters/Ghoul.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Objects/Lever.tscn" type="PackedScene" id=11]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle1.png" type="Texture" id=12]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle3.png" type="Texture" id=12]
 [ext_resource path="res://src/Objects/Gate.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Objects/Pizza.tscn" type="PackedScene" id=14]
 
@@ -519,6 +519,9 @@ door_switch_id = 1
 
 [node name="Pizza" parent="." instance=ExtResource( 14 )]
 position = Vector2( 353, 315 )
+
+[node name="Pizza2" parent="." instance=ExtResource( 14 )]
+position = Vector2( 443, 313 )
 
 [editable path="Girl"]
 [editable path="Girl/Gun"]

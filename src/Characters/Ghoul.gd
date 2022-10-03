@@ -3,7 +3,6 @@ class_name Ghoul
 
 onready var playerr_pos = Vector2.ZERO
 onready var health_bar = $ghoul/HealthBar
-onready var health_text = $ghoul/HealthBar/Health
 
 export var score: = 100
 export var bullet_speed = 1000
@@ -16,12 +15,14 @@ var bullet_object = preload("res://src/Objects/BulletEnemy.tscn")
 var floating_text2 = preload("res://src/UI/FloatingText2.tscn")
 var can_fire = true
 var damage_done = 0
+var new_max_health = 0
 
 func _ready() -> void:
 	set_physics_process(false)
 	_velocity.x = -speed.x
-	
 	health_bar.max_value = health
+	new_max_health = health
+	health_bar.visible = false
 
 	
 func _on_Stomp_body_entered(body: Node) -> void:
@@ -40,10 +41,14 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	health_bar.value = health
-	health_text.set_text(str(health))
 	if health < health / 2:
 		health_bar.tint_progress = Color(0.984314, 0, 0)
 	damage_done = damage[randi() % 2]
+	
+	if health != new_max_health:
+		$ghoul/HealthBar/Tween.interpolate_property($ghoul/HealthBar, "visible", true, false, 3, Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT)
+		$ghoul/HealthBar/Tween.start()
+		new_max_health = health
 	
 	
 	playerr_pos = $"/root/PlayerData".player_pos
@@ -69,7 +74,6 @@ func _process(delta: float) -> void:
 		add_child(bullet_shoot)
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
-		bullet_shoot.queue_free()
 		can_fire = true
 		
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://start-assets/TileSet/tileset.png" type="Texture" id=1]
 [ext_resource path="res://start-assets/Parallax/skill-foreground.png" type="Texture" id=2]
@@ -8,12 +8,14 @@
 [ext_resource path="res://start-assets/Parallax/bbg.png" type="Texture" id=6]
 [ext_resource path="res://src/Characters/Girl.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/UI/UserInterface.tscn" type="PackedScene" id=8]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle2.png" type="Texture" id=9]
+[ext_resource path="res://src/Objects/Pizza.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Objects/Gate.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Characters/Test/GhoulWalking.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Objects/Lever.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Objects/Sign.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Objects/Platform.tscn" type="PackedScene" id=14]
+[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle2.png" type="Texture" id=15]
+[ext_resource path="res://src/Characters/Ghoul.tscn" type="PackedScene" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -520,7 +522,7 @@ tile_data = PoolIntArray( 131081, -1610612736, 393220, 196617, -1610612736, 3932
 position = Vector2( 191, 327 )
 
 [node name="Player" parent="Girl" index="1"]
-texture = ExtResource( 9 )
+texture = ExtResource( 15 )
 
 [node name="Camera2D" parent="Girl" index="5"]
 limit_left = 0
@@ -563,6 +565,11 @@ message_text = "Shoot: PRESS ENTER OR LEFT CLICK TO SHOOT"
 position = Vector2( 1669, 336 )
 message_text = "Press E to activate the switch"
 
+[node name="HealthSign" parent="Signs" instance=ExtResource( 13 )]
+position = Vector2( 2295, 191 )
+scale = Vector2( -1, 1 )
+message_text = "Don't forget to grab a lunch if your health is low!"
+
 [node name="Gate" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2127, 296 )
 door_switch_id = 1
@@ -576,6 +583,18 @@ position = Vector2( 2701, 126 )
 
 [node name="PathFollow2D" parent="PlatformPath" index="0"]
 position = Vector2( 325.8, 142.91 )
+
+[node name="Pizza" parent="." instance=ExtResource( 9 )]
+position = Vector2( 2576, 112 )
+
+[node name="Pizza2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 4282, 287 )
+
+[node name="Pizza3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 4373, 286 )
+
+[node name="Ghoul" parent="." instance=ExtResource( 16 )]
+position = Vector2( 3995, 352 )
 
 [editable path="Girl"]
 [editable path="Girl/Gun"]

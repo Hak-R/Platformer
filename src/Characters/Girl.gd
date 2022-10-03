@@ -1,6 +1,7 @@
 extends Actor 
 
 signal in_bullet
+signal pizza_eaten
 
 onready var animation_tree = $AnimationTree
 onready var animation_mode = animation_tree.get("parameters/playback")
@@ -9,6 +10,7 @@ onready var cam_limit: Camera2D = get_node("Camera2D")
 onready var bullet_object = preload("res://src/Objects/Bullet.tscn")
 onready var shoot_timer = $ShootTimer
 onready var mouse_position = Vector2.ZERO
+onready var pizzas = get_tree().get_nodes_in_group("Pizza")
 
 export var stomp_impulse: = 300.0
 export var bullet_speed = 600
@@ -48,7 +50,10 @@ func _on_EnemyDetect_body_entered(body: Node) -> void:
 		emit_signal("in_bullet")
 	
 
-func _ready() -> void:	
+func _ready() -> void:
+	for pizza in pizzas:
+		pizza.connect("in_pizza", self, "pizza_eaten")
+	
 	dead = false
 	animation_tree.set("parameters/Alive/current", 0)
 	$"/root/PlayerData".player_health = health
@@ -97,7 +102,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		
 func _process(delta: float) -> void:
-	
 	$Debug/Label1.text = "Movement " + str(animation_tree.get("parameters/Movement/current"))
 	$Debug/Label2.text = "CrouchTransition " + str(animation_tree.get("parameters/CrouchTransition/current"))
 	$Debug/Label3.text = str(animation_tree.get("parameters/Movement/current"))
@@ -250,5 +254,9 @@ func damage() -> void:
 	if health == 0:
 		die()
 
-func testy():
-	print("Test works")
+func pizza_eaten():
+	if health <= 9:
+		health += 1
+		$"/root/PlayerData".player_health = health
+		emit_signal("pizza_eaten")
+		
