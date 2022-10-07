@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://start-assets/TileSet/tileset.png" type="Texture" id=1]
 [ext_resource path="res://start-assets/Parallax/skill-foreground.png" type="Texture" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://src/Characters/NoteEnemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Characters/Ghoul.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Objects/Lever.tscn" type="PackedScene" id=11]
-[ext_resource path="res://start-assets/Nera/sprites/torso/idle/torso_idle3.png" type="Texture" id=12]
 [ext_resource path="res://src/Objects/Gate.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Objects/Pizza.tscn" type="PackedScene" id=14]
 
@@ -491,9 +490,6 @@ tile_data = PoolIntArray( -1572855, 0, 0, -1572854, 0, 0, -1572730, 0, 0, -15727
 
 [node name="Girl" parent="." instance=ExtResource( 7 )]
 position = Vector2( 284, 325 )
-
-[node name="Player" parent="Girl" index="1"]
-texture = ExtResource( 12 )
 
 [node name="Camera2D" parent="Girl" index="5"]
 limit_left = 0

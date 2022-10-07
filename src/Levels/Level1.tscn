@@ -532,6 +532,9 @@ smoothing_speed = 20.0
 [node name="AnimationTree" parent="Girl" index="8"]
 parameters/ShootPos/current = 0
 
+[node name="SpeechBubble" parent="Girl" index="11"]
+position = Vector2( 1, -49 )
+
 [node name="GhoulWalk" type="Node" parent="."]
 
 [node name="EnemyPathing" parent="GhoulWalk" instance=ExtResource( 11 )]
