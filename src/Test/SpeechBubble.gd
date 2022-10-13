@@ -4,7 +4,7 @@ onready var text_node = $Anchor/ColorRect/RichTextLabel
 onready var text_bg = $Anchor/ColorRect
 
 const CHAR_TIME = 0.08
-const MARGIN_OFFSET = 8
+const MARGIN_OFFSET = 160
 
 func _ready():
 	visible = false
